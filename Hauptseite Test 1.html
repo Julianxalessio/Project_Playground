@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hauptseite</title>
+
+  <link rel="icon" type="image/png" href="Logo.png">
+  <link rel="stylesheet" href="DarkModeSwitch.css">
+
+  <style>
+    body {
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      transition: background-image 0.5s;
+      position: relative;
+      margin: 0;
+      padding: 0;
+      background-size: cover;
+      background-position: center;
+      height: 900px;
+    }
+    h1 {
+      font-size: 3em;
+    }
+    #uhrzeit {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 1.5em; 
+    }
+    .Logo {
+      width: 100px;
+      position: absolute;
+    }
+    
+  </style>
+</head>
+
+<body>
+  <h1>Apps</h1>
+  <div id="uhrzeit"></div>
+  <div id="dateiInhalt"></div>
+
+  <!--Bilder (Logos für Apps)-->
+  <img id="imgVoice" src="Assistant/Voice.png" style="left: 631px;" class="Logo" onclick="OpenVoice()"><img>
+  <img id="ImgSichererOrdner" src="Sicherer Ordner/Sicherer Ordner.png" style="left: 106px;" class="Logo" onclick="OpenSichererOrdner()"><img>
+  <img id="ImgZähler" src="Zähler/Zähler.png" style="left: 1px;" class="Logo" onclick="OpenZähler()"><img>
+  <img id="TimerImg" src="Timer/Stoppuhr.png" style="left: 316px;" class="Logo" onclick="OpenTimer()"><img>
+  <img id="ImgSearch" src="Search/Search.png" style="left: 211px;" class="Logo" onclick="OpenSearch()"><img>
+  <img id="imgKontakte" src="Kontakte/Kontakte.png" style="left: 421px;" class="Logo" onclick="OpenKontakte()"><img>
+  <img id="imgMathe" src="Mathe Rätsel/Mathe-Räsel.png" style="left: 526px;" class="Logo" onclick="OpenMathe()"><img>
+  <img id="imgMathe" src="QuizMaze/Screenshot 2024-08-09 113159.png" style="left: 736px; width: 105px;" class="Logo" onclick="OpenQuizMaze()"><img>
+
+  <script defer>
+    function OpenSichererOrdner() {
+      window.location.replace("Sicherer Ordner/Sicherer Ordner Test 12.html");
+    }
+    function OpenZähler() {
+      window.location.replace("Zähler/Zähler Test 1.html");
+    }
+    function OpenTimer() {
+      window.location.replace("Timer/Timer Test 1.html");
+    }
+    function OpenSearch() {
+      window.location.replace("Search/Search.html");
+    }
+    function OpenKontakte() {
+      window.location.replace("Kontakte/Kontakte Test 1.html");
+    }
+    function OpenMathe(){
+      window.location.replace("Mathe Rätsel/Mathe_Puzzle.html");
+    }
+    function OpenVoice(){
+      window.location.replace("Assistant/Test Voice.html");
+    }
+    function OpenQuizMaze(){
+      window.location.replace("QuizMaze/Game 1.html");
+    }
+    function uhrzeit() {
+      var jetzt = new Date(),
+        h = jetzt.getHours(),
+        m = jetzt.getMinutes(),
+        s = jetzt.getSeconds();
+      m = fuehrendeNull(m);
+      s = fuehrendeNull(s);
+      document.getElementById('uhrzeit').innerHTML = h + ':' + m + ':' + s;
+      setTimeout(uhrzeit, 500);
+    }
+    function fuehrendeNull(zahl) {
+      zahl = (zahl < 10 ? '0' : '') + zahl;
+      return zahl;
+    }
+    
+    document.getElementById("darkModeToggle").addEventListener("change", function() {
+      document.body.classList.toggle("dark-mode");
+    });
+
+    uhrzeit();
+  </script>
+
+  <script src="DarkModeSwitch.js"></script>
+  
+</body>
+
+</html>

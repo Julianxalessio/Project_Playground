@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../CSS Files/CloseButton.css">
+    <link rel="stylesheet" href="CssStyleGame.css">
+
+
+    <title>MiniGame</title>
+    <style>
+        
+    </style>
+</head>
+
+<body>
+    <img id="Player" src="MiniGame caracter(1).png" alt="Player">
+
+    <!--Walls-->
+    <img id="Wall1" class="Walls" src="First Wall.png" alt="Test Block">
+    <img id="Wall2" class="Walls" src="First Wall.png" alt="Test Block">
+    <img id="Wall3" class="Walls" src="First Wall.png" alt="Test Block">
+    <img id="Wall4" class="Walls" src="First Wall.png" alt="Test Block">
+    <img id="Wall5" class="Walls" src="First Wall.png" alt="Test Block">
+    <img id="Wall6" class="Walls" src="First Wall.png" alt="Test Block">
+    <img id="Wall7" class="Walls" src="First Wall.png" alt="Test Block">
+    <img id="Wall8" class="Walls" src="First Wall.png" alt="Test Block">
+    <img id="Wall9" class="Walls" src="First Wall.png" alt="Test Block">
+    <img id="Wall10" class="Walls" src="First Wall.png" alt="Test Block">
+    <img id="Wall11" class="Walls" src="First Wall.png" alt="Test Block">
+    <img id="Wall12" class="Walls" src="First Wall.png" alt="Test Block">
+    <img id="Wall13" class="Walls" src="First Wall.png" alt="Test Block">
+    <img id="Wall14" class="Walls" src="First Wall.png" alt="Test Block">
+    <img id="Wall15" class="Walls" src="First Wall.png" alt="Test Block">
+
+    <!--Gates-->
+    <img id="Gate1" class="Gates" src="First Wall.png" alt="Test Block">
+    <img id="Gate1b" class="Gates" src="First Wall.png" alt="Test Block">
+
+    <button id="Ok" onclick="check()">Ok</button>
+    <script src="../JS Files/CloseButton.js"></script>
+    <script src="Database Questions.js"></script>
+    <script src="FunctionsGame1.js"></script>
+    <script>
+        let TryOQ = 3;
+        let Lives = 3;
+        let randomInt = getRandomInt(1, 10);
+        let dataById = null;
+        const blockPadding = 15; // Padding für die Verkleinerung der Hitbox des Blocks !!! NICHT ÄNDERN !!!
+
+        //GateBehindHide
+        Gate1b.style.display = 'none';
+
+        //JS Objekte
+        var Rechnung = document.createElement("big");
+        Rechnung.id = "FrageOutput";
+        Rechnung.textContent = " ";
+        document.body.appendChild(Rechnung);
+
+        var Input = document.createElement("input");
+        Input.id = "Answer";
+        Input.textContent = " ";
+        document.body.appendChild(Input);
+
+        const Infos = document.createElement("big");
+        Infos.id = "Infos";
+        Infos.textContent = "Leben: " + Lives + " Versuche: " + TryOQ;
+        document.body.appendChild(Infos);
+
+        localStorage.setItem('quizData', JSON.stringify(data));
+
+        let GateNumber = 1; //GateNummer muss gewechselt werden mit dem Tor wo der Spieler steht
+        function OpenGate(GateNumber) {
+            const gateElement = document.getElementById(Gate1);
+            if (gateElement) {
+                Gate1.style.display = 'none'; // Beispiel: Tor verschwindet
+            }
+        }
+    </script>
+</body>
+
+</html>

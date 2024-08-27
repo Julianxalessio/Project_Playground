@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mathe-Puzzle</title>
+  <link rel="stylesheet" href="../CSS Files/CloseButton.css">
+  <link rel="stylesheet" href="../CSS Files/DarkModeSwitch.css">
+  
+  <style>
+    body {
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      transition: background-color 0.5s;
+      position: relative;
+      margin: 0;
+      padding: 0;
+    }
+
+    #Ok{
+      position: absolute;
+      top: 98px;
+      left: 295px;
+    }
+    #RechnungButton{
+      position: absolute;
+      top: 95px;
+      left: 10px
+    }
+    #ErgebnisEingabeFeld{
+      position: absolute;
+      top: 98px;
+      left: 115px
+    }
+    #Bild1, #Bild1D {
+      max-width: 100%;
+      max-height: 100%;
+      position: absolute;
+      top: 400px;
+      left: 200px;
+    }
+    #Bild2, #Bild2D {
+      max-width: 100%;
+      max-height: 100%;
+      position: absolute;
+      top: 400px;
+      left: 358px;
+    }
+    #Bild3, #Bild3D {
+      max-width: 100%;
+      max-height: 100%;
+      position: absolute;
+      top: 400px;
+      left: 516px;
+    }
+    #Bild4, #Bild4D {
+      max-width: 100%;
+      max-height: 100%;
+      position: absolute;
+      top: 489px;
+      left: 516px;
+    }
+    #Bild5, #Bild5D {
+      max-width: 100%;
+      max-height: 100%;
+      position: absolute;
+      top: 489px;
+      left: 358px;
+    }
+    #Bild6, #Bild6D {
+      max-width: 100%;
+      max-height: 100%;
+      position: absolute;
+      top: 489px;
+      left: 200px;
+    }
+    #Bild7, #Bild7D {
+      max-width: 100%;
+      max-height: 100%;
+      position: absolute;
+      top: 578px;
+      left: 200px;
+    }
+    #Bild8, #Bild8D {
+      max-width: 100%;
+      max-height: 100%;
+      position: absolute;
+      top: 578px;
+      left: 358px;
+    }
+    #Bild9, #Bild9D {
+      max-width: 100%;
+      max-height: 100%;
+      position: absolute;
+      top: 578px;
+      left: 516px;
+    }
+    #UmdrehenButton{
+      position: absolute;
+      top: 350px;
+      left: 25%;
+    }
+    .big-text {
+            font-size: 1.5em; 
+        }
+  </style>
+</head>
+
+<body>
+  <h1>Mathe-Puzzle</h1>
+  
+  <!--Texte-->
+  <small>Immer auf 2 Kommastellen nach dem Komma gerundet </small>
+  
+  <!--Bilder-->
+  <div class="img"><img id="Bild1" src="Bild1.png" alt="Zähler Image"></div>
+  <div class="img"><img id="Bild2" src="Bild2.v1(1).png" alt="Zähler Image"></div>
+  <div class="img"><img id="Bild3" src="Bild3.v1(1).png" alt="Zähler Image"></div>
+  <div class="img"><img id="Bild4" src="Bild4.v1(1).png" alt="Zähler Image"></div>
+  <div class="img"><img id="Bild5" src="Bild5.v1(1).png" alt="Zähler Image"></div>
+  <div class="img"><img id="Bild6" src="Bild6.v1(1).png" alt="Zähler Image"></div>
+  <div class="img"><img id="Bild7" src="Bild7.v1(1).png" alt="Zähler Image"></div>
+  <div class="img"><img id="Bild8" src="Bild8.v1(1).png" alt="Zähler Image"></div>
+  <div class="img"><img id="Bild9" src="Bild9.v1(1).png" alt="Zähler Image"></div>
+  <div class="img"><img id="Bild1D" src="Bild1.D.png" alt="Zähler Image" onclick="hide1()"></div>
+  <div class="img"><img id="Bild2D" src="Bild1.D.png" alt="Zähler Image" onclick="hide2()"></div>
+  <div class="img"><img id="Bild3D" src="Bild1.D.png" alt="Zähler Image" onclick="hide3()"></div>
+  <div class="img"><img id="Bild4D" src="Bild1.D.png" alt="Zähler Image" onclick="hide4()"></div>
+  <div class="img"><img id="Bild5D" src="Bild1.D.png" alt="Zähler Image" onclick="hide5()"></div>
+  <div class="img"><img id="Bild6D" src="Bild1.D.png" alt="Zähler Image" onclick="hide6()"></div>
+  <div class="img"><img id="Bild7D" src="Bild1.D.png" alt="Zähler Image" onclick="hide7()"></div>
+  <div class="img"><img id="Bild8D" src="Bild1.D.png" alt="Zähler Image" onclick="hide8()"></div>
+  <div class="img"><img id="Bild9D" src="Bild1.D.png" alt="Zähler Image" onclick="hide9()"></div>
+
+  <!--Buttons-->
+  <button id="Ok" onclick="controll()">Ok</button>
+
+  <!--Inputfelder-->
+  <input id="ErgebnisEingabeFeld" type="text">
+
+  <script defer>
+    
+    //Variablen
+    var Ergebnis, Zahl1, Zahl2, Was, WasZahl;
+    var Umdrehen = 0;
+
+    //Texte mit Variablen
+    var Rechnung = document.createElement("big");
+    Rechnung.id = "RechnungButton";
+    Rechnung.textContent = Zahl1 + " " + Was + " " + Zahl2 + " " + "=";
+    document.body.appendChild(Rechnung);
+
+    var Umdrehend = document.createElement("small");
+    Umdrehend.id = "UmdrehenButton";
+    Umdrehend.textContent = "Du kannst noch " + Umdrehen + " schwarze Felder umdrehen";
+    document.body.appendChild(Umdrehend);
+    
+    //Functions
+    function controll() {
+      var userAnswer = parseFloat(ErgebnisEingabeFeld.value);
+      if (userAnswer == Ergebnis) {
+        Korrekt();
+        erneuereRechnungsfeld();
+        Umdrehen += 1;
+        updateUmdrehenText(); 
+      } else {
+        alert("Falsches Ergebnis");
+        erneuereRechnungsfeld();
+        Falsch();
+      }
+    }
+    function erneuereRechnungsfeld() {
+      Rechnung.textContent = Zahl1 + " " + Was + " " + Zahl2 + " " + "=";
+      ErgebnisEingabeFeld.value = '';
+    }
+    function generateRandomNumber(min, max) {
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+    function Falsch() {
+      // Hier könntest du weitere Aktionen implementieren, wenn die Antwort falsch ist.
+    }
+    function Korrekt() {
+      neueZahl();
+      updateUmdrehenText();  // Aktualisiere den Text nach einer korrekten Antwort
+    }
+    function neueZahl() {
+      Zahl1 = generateRandomNumber(1, 100);
+      Zahl2 = generateRandomNumber(1, 100);
+      WasZahl = generateRandomNumber(1, 2);
+
+      if (WasZahl === 1) {
+        Was = "+";
+        Ergebnis = Zahl1 + Zahl2;
+      } else if (WasZahl === 2) {
+        Was = "-";
+        Ergebnis = Zahl1 - Zahl2;
+      } else if (WasZahl === 3) {
+        Was = "×";
+        Ergebnis = Zahl1 * Zahl2;
+      } else if (WasZahl === 4) {
+        Was = "÷";
+        Ergebnis = Zahl1 / Zahl2;
+        Ergebnis = parseFloat(Ergebnis.toFixed(2));
+      }
+
+      document.body.removeChild(Rechnung);
+
+      Rechnung = document.createElement("big");
+      Rechnung.id = "RechnungButton";
+      Rechnung.textContent = Zahl1 + " " + Was + " " + Zahl2 + " " + "=";
+      document.body.appendChild(Rechnung);
+
+      console.log(Ergebnis);
+    }
+    function hide1() {
+      if (Umdrehen >= 1) {
+        var bild = document.getElementById("Bild1D");
+        bild.style.display = "none";
+        Umdrehen -= 1;
+        updateUmdrehenText();  // Aktualisiere den Text nach dem Umdrehen
+      }
+    }
+    function hide2() {
+      if (Umdrehen >= 1) {
+        var bild = document.getElementById("Bild2D");
+        bild.style.display = "none";
+        Umdrehen -= 1;
+        updateUmdrehenText();  // Aktualisiere den Text nach dem Umdrehen
+      }
+    }
+    function hide3() {
+      if (Umdrehen >= 1) {
+        var bild = document.getElementById("Bild3D");
+        bild.style.display = "none";
+        Umdrehen -= 1;
+        updateUmdrehenText();  // Aktualisiere den Text nach dem Umdrehen
+      }
+    }
+    function hide4() {
+      if (Umdrehen >= 1) {
+        var bild = document.getElementById("Bild4D");
+        bild.style.display = "none";
+        Umdrehen -= 1;
+        updateUmdrehenText();  // Aktualisiere den Text nach dem Umdrehen
+      }
+    }
+    function hide5() {
+      if (Umdrehen >= 1) {
+        var bild = document.getElementById("Bild5D");
+        bild.style.display = "none";
+        Umdrehen -= 1;
+        updateUmdrehenText();  // Aktualisiere den Text nach dem Umdrehen
+      }
+    }
+    function hide6() {
+      if (Umdrehen >= 1) {
+        var bild = document.getElementById("Bild6D");
+        bild.style.display = "none";
+        Umdrehen -= 1;
+        updateUmdrehenText();  // Aktualisiere den Text nach dem Umdrehen
+      }
+    }
+    function hide7() {
+      if (Umdrehen >= 1) {
+        var bild = document.getElementById("Bild7D");
+        bild.style.display = "none";
+        Umdrehen -= 1;
+        updateUmdrehenText();  // Aktualisiere den Text nach dem Umdrehen
+      }
+    }
+    function hide8() {
+      if (Umdrehen >= 1) {
+        var bild = document.getElementById("Bild8D");
+        bild.style.display = "none";
+        Umdrehen -= 1;
+        updateUmdrehenText();  // Aktualisiere den Text nach dem Umdrehen
+      }
+    }
+    function hide9() {
+      if (Umdrehen >= 1) {
+        var bild = document.getElementById("Bild9D");
+        bild.style.display = "none";
+        Umdrehen -= 1;
+        updateUmdrehenText();  // Aktualisiere den Text nach dem Umdrehen
+      }
+    }
+    function updateUmdrehenText() {
+      Umdrehend.textContent = "Du kannst noch " + Umdrehen + " schwarze Felder umdrehen";
+    }
+    neueZahl();
+    
+  </script>
+  <script src="../JS Files/CloseButton.js"></script>
+  <script src="../JS Files/DarkModeSwitch.js"></script>
+
+</body>
+
+</html>

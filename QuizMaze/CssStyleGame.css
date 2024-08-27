@@ -1,0 +1,160 @@
+:root {
+    --top: 65px;
+    --left: 600px;
+    --transform: scaleX(-1);
+    --Gate1t: 160px;
+    --Gate1l: 405px;
+    --Gate1bt: 85px;
+    --Gate1bl: 480px;
+}
+
+#Player {
+    max-width: 115px;
+    max-height: 115px;
+    position: absolute;
+    top: var(--top);
+    left: var(--left);
+    transform: var(--transform);
+}
+
+#Wall1 {
+    top: 10px;
+    left: 330px;
+    width: 1275px;
+}
+
+#Wall2 {
+    top: 10px;
+    left: 330px;
+    width: 75px;
+    height: 900px;
+}
+
+#Wall3 {
+    top: 85px;
+    left: 705px;
+    width: 75px;
+    height: 375px;
+}
+
+#Wall4 {
+    top: 160px;
+    left: 480px;
+    width: 225px;
+}
+
+#Wall5 {
+    top: 835px;
+    left: 330px;
+    width: 1275px;
+}
+
+#Wall6 {
+    top: 10px;
+    left: 1530px;
+    width: 75px;
+    height: 900px;
+}
+
+#Wall7 {
+    top: 235px;
+    left: 480px;
+    width: 75px;
+    height: 375px;
+}
+
+#Wall8 {
+    top: 685px;
+    left: 480px;
+    width: 75px;
+    height: 150px;
+}
+
+#Wall9 {
+    top: 535px;
+    left: 555px;
+    width: 375px;
+}
+
+#Wall10 {
+    top: 0px;
+    left: 0px;
+    width: 75px;
+}
+
+#Wall11 {
+    top: 0px;
+    left: 0px;
+    width: 75px;
+}
+
+#Wall12 {
+    top: 0px;
+    left: 0px;
+    width: 75px;
+}
+
+#Wall13 {
+    top: 0px;
+    left: 0px;
+    width: 75px;
+}
+
+#Wall14 {
+    top: 0px;
+    left: 0px;
+    width: 75px;
+}
+
+#Wall15 {
+    top: 0px;
+    left: 0px;
+    width: 75px;
+}
+
+#Gate1{
+    top: var(--Gate1t);
+    left: var(--Gate1l);
+}
+
+#Gate1b {
+    top: var(--Gate1bt);
+    left: var(--Gate1bl);
+}
+
+.Walls {
+    position: absolute;
+    height: 75px;
+}
+
+#FrageOutput {
+    position: absolute;
+    left: 10px;
+    top: 300px;
+    font-size: 16.5px;
+}
+
+#Answer {
+    position: absolute;
+    left: 10px;
+    top: 350px;
+}
+
+#Ok {
+    position: absolute;
+    left: 170px;
+    top: 350px;
+}
+
+#Infos {
+    position: absolute;
+    right: 20px;
+    top: 10px;
+}
+
+.Gates {
+    position: absolute;
+    height: 75px;
+    width: 75px;
+    filter: brightness(0) invert(1);
+}

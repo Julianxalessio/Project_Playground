@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Search</title>
+  <link rel="stylesheet" href="../CSS Files/CloseButton.css">
+  <link rel="stylesheet" href="../CSS Files/DarkModeSwitch.css">
+  <style>
+    body {
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      transition: background-color 0.5s;
+      position: relative;
+      margin: 0;
+      padding: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Search</h1>
+
+  <div id="dateiInhalt"></div>
+
+  <input type="text" id="searchInput" placeholder="">
+  
+  <button onclick="Search()">Search</button>
+
+  <script defer>
+    function Search() {
+      var query = document.getElementById("searchInput").value;
+      window.open("https://www.bing.com/search?q=" + query, "_blank");
+    }
+
+  </script>
+  <script src="../JS Files/CloseButton.js"></script>
+  <script src="../JS Files/DarkModeSwitch.js"></script>
+
+</body>
+
+</html>
