@@ -77,27 +77,29 @@
 }
 
 #Wall10 {
-    top: 0px;
-    left: 0px;
+    top: 160px;
+    left: 855px;
     width: 75px;
+    height: 375px;
 }
 
 #Wall11 {
-    top: 0px;
-    left: 0px;
+    top: 385px;
+    left: 630px;
     width: 75px;
 }
 
 #Wall12 {
-    top: 0px;
-    left: 0px;
+    top: 85px;
+    left: 1005px;
     width: 75px;
+    height: 675px;
 }
 
 #Wall13 {
-    top: 0px;
-    left: 0px;
-    width: 75px;
+    top: 685px;
+    left: 555px;
+    width: 450px;
 }
 
 #Wall14 {

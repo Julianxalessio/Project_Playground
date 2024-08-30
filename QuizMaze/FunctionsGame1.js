@@ -1,5 +1,6 @@
 //Variablen
 let OnebOpen = 0;
+let GateNumber = 1;
 
 
 //Functions für Fragen
@@ -92,7 +93,16 @@ function CheckQuestion (){
             
         }
     }
+    //TP
+    if(currentTopCQ >= 215 && currentTopCQ <= 290){
+        if(currentLeftCQ >= 540 && currentLeftCQ <= 615){
+            console.log("Failure TP");
+
+        }
+    }
 }
+
+
 
 
 //Functions für Hitbox
@@ -139,7 +149,7 @@ function movePlayer(direction) {
     const gates = document.getElementsByClassName('Gates');
     const currentTop = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--top'));
     const currentLeft = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--left'));
-    
+
     CheckQuestion();
 
     let newTop = currentTop;
@@ -192,3 +202,4 @@ document.addEventListener('keydown', function (event) {
             break;
     }
 });
+
