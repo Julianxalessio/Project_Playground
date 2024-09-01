@@ -15,6 +15,7 @@
     top: var(--top);
     left: var(--left);
     transform: var(--transform);
+    z-index: 2;
 }
 
 #Wall1 {
@@ -67,7 +68,7 @@
     top: 685px;
     left: 480px;
     width: 75px;
-    height: 150px;
+    height: 75px;
 }
 
 #Wall9 {
@@ -103,15 +104,22 @@
 }
 
 #Wall14 {
-    top: 0px;
-    left: 0px;
+    top: 160px;
+    left: 1155px;
     width: 75px;
+    height: 675px;
 }
 
 #Wall15 {
-    top: 0px;
-    left: 0px;
-    width: 75px;
+    top: 160px;
+    left: 1230px;
+    width: 150px;
+}
+
+#Wall16 {
+    top: 685px;
+    left: 1230px;
+    width: 225px;
 }
 
 #Gate1{
@@ -154,9 +162,29 @@
     top: 10px;
 }
 
+#Key {
+    position: absolute;
+    top: 280px;
+    left: 590px;
+    height: 75px;
+    width: 75px;
+    z-index: 1;
+}
+
 .Gates {
     position: absolute;
     height: 75px;
     width: 75px;
     filter: brightness(0) invert(1);
+}
+
+#SignKey{
+    position: absolute;
+    top: 25%;
+    right: 20px;
+}
+#KeyDoor{
+    position: absolute;
+    top: 760px;
+    left: 480px;
 }

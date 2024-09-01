@@ -1,6 +1,7 @@
 //Variablen
 let OnebOpen = 0;
 let GateNumber = 1;
+let KeyCollected = false;
 
 
 //Functions für Fragen
@@ -96,8 +97,19 @@ function CheckQuestion (){
     //TP
     if(currentTopCQ >= 215 && currentTopCQ <= 290){
         if(currentLeftCQ >= 540 && currentLeftCQ <= 615){
-            console.log("Failure TP");
+            Key.style.display = 'none';
+            SignKey.style.display = 'block';
+            KeyCollected = true;
 
+        }
+    }
+    //KeyDoor
+    if(KeyCollected == true){
+        if (currentLeftCQ == 390){
+            if (currentTopCQ == 740){
+                KeyDoor.style.display = 'none';
+                SignKey.style.display = 'none';
+            }
         }
     }
 }

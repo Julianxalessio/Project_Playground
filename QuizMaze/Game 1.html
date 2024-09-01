@@ -33,7 +33,13 @@
     <img id="Wall13" class="Walls" src="First Wall.png" alt="Test Block">
     <img id="Wall14" class="Walls" src="First Wall.png" alt="Test Block">
     <img id="Wall15" class="Walls" src="First Wall.png" alt="Test Block">
+    <img id="Wall16" class="Walls" src="First Wall.png" alt="Test Block">
+    
+    <img id="Key" src="Key.png" alt="Key">
+    <img id="KeyDoor" class="Walls" src="KeyHole.png" alt="KeyDoor">
 
+
+    <h1 id="SignKey">Key collected</h1>
     <!--Gates-->
     <img id="Gate1" class="Gates" src="First Wall.png" alt="Test Block">
     <img id="Gate1b" class="Gates" src="First Wall.png" alt="Test Block">
@@ -49,6 +55,7 @@
         let dataById = null;
         const blockPadding = 15; // Padding für die Verkleinerung der Hitbox des Blocks !!! NICHT ÄNDERN !!!
 
+        SignKey.style.display = 'none';
         //GateBehindHide
         Gate1b.style.display = 'none';
 
