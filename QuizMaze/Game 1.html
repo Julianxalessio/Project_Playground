@@ -10,7 +10,7 @@
 
     <title>MiniGame</title>
     <style>
-        
+
     </style>
 </head>
 
@@ -34,15 +34,19 @@
     <img id="Wall14" class="Walls" src="First Wall.png" alt="Test Block">
     <img id="Wall15" class="Walls" src="First Wall.png" alt="Test Block">
     <img id="Wall16" class="Walls" src="First Wall.png" alt="Test Block">
-    
+
     <img id="Key" src="Key.png" alt="Key">
     <img id="KeyDoor" class="Walls" src="KeyHole.png" alt="KeyDoor">
 
 
     <h1 id="SignKey">Key collected</h1>
     <!--Gates-->
-    <img id="Gate1" class="Gates" src="First Wall.png" alt="Test Block">
+    <img id="Gate1" class="Gates" src="QuestionGate.png" alt="Test Block">
     <img id="Gate1b" class="Gates" src="First Wall.png" alt="Test Block">
+    <img id="Gate2" class="Gates" src="QuestionGate.png" alt="Test Block">
+    <img id="Gate2b" class="Gates" src="First Wall.png" alt="Test Block">
+    <img id="Gate3" class="Gates" src="QuestionGate.png" alt="Test Block">
+    <img id="Gate3b" class="Gates" src="First Wall.png" alt="Test Block">
 
     <button id="Ok" onclick="check()">Ok</button>
     <script src="../JS Files/CloseButton.js"></script>
@@ -58,6 +62,9 @@
         SignKey.style.display = 'none';
         //GateBehindHide
         Gate1b.style.display = 'none';
+        Gate2b.style.display = 'none';
+        Gate3b.style.display = 'none';
+
 
         //JS Objekte
         var Rechnung = document.createElement("big");
@@ -76,9 +83,6 @@
         document.body.appendChild(Infos);
 
         localStorage.setItem('quizData', JSON.stringify(data));
-
-        
-
     </script>
 </body>
 

@@ -2,10 +2,6 @@
     --top: 65px;
     --left: 600px;
     --transform: scaleX(-1);
-    --Gate1t: 160px;
-    --Gate1l: 405px;
-    --Gate1bt: 85px;
-    --Gate1bl: 480px;
 }
 
 #Player {
@@ -122,14 +118,34 @@
     width: 225px;
 }
 
-#Gate1{
-    top: var(--Gate1t);
-    left: var(--Gate1l);
+#Gate1 {
+    top: 160px;
+    left: 405px;
 }
 
 #Gate1b {
-    top: var(--Gate1bt);
-    left: var(--Gate1bl);
+    top: 85px;
+    left: 480px;
+}
+
+#Gate2 {
+    top: 610px;
+    left: 630px;
+}
+
+#Gate2b {
+    top: 610px;
+    left: 480px;
+}
+
+#Gate3 {
+    top: 460px;
+    left: 930px;
+}
+
+#Gate3b {
+    top: 610px;
+    left: 930px;
 }
 
 .Walls {
@@ -158,8 +174,8 @@
 
 #Infos {
     position: absolute;
-    right: 20px;
-    top: 10px;
+    left: 10px;
+    top: 250px;
 }
 
 #Key {
@@ -175,15 +191,16 @@
     position: absolute;
     height: 75px;
     width: 75px;
-    filter: brightness(0) invert(1);
+    opacity: 0.75;
 }
 
-#SignKey{
+#SignKey {
     position: absolute;
-    top: 25%;
-    right: 20px;
+    top: 450px;
+    left: 10px;
 }
-#KeyDoor{
+
+#KeyDoor {
     position: absolute;
     top: 760px;
     left: 480px;

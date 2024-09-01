@@ -1,6 +1,8 @@
 //Variablen
 let OnebOpen = 0;
-let GateNumber = 1;
+let TwobOpen = 0;
+let ThreebOpen = 0;
+let GateNumber = 0;
 let KeyCollected = false;
 
 
@@ -16,9 +18,12 @@ function FrageRichtig() {
     TryOQ = 3;
     Infos.textContent = "Leben: " + Lives + " Versuche: " + TryOQ;
     Gate1b.style.display = 'none';
+    Gate2b.style.display = 'none';
+    Gate3b.style.display = 'none';
+
     const gateElement = document.getElementById(`Gate${GateNumber}`);
     if (gateElement) {
-        gateElement.style.display = 'none';  
+        gateElement.style.display = 'none';
     }
 }
 
@@ -71,7 +76,7 @@ function check() {
 }
 
 function neueFrage() {
-    const randomNum = getRandomInt(1, 3);
+    const randomNum = getRandomInt(1, 1);
     dataById = getDataById(randomNum);
     if (dataById) {
         const frage = dataById.frage;
@@ -79,24 +84,40 @@ function neueFrage() {
     }
 }
 
-function CheckQuestion (){
+function CheckQuestion() {
     const currentTopCQ = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--top'));
     const currentLeftCQ = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--left'));
-    
-    if(currentTopCQ==65){ 
-        if(currentLeftCQ==390){
-            if(OnebOpen == 0){
+
+    if (currentTopCQ == 65 && currentLeftCQ == 390) {
+        if (OnebOpen == 0) {
             Gate1b.style.display = 'block';
             neueFrage();
-            }
-            let GateNumber = 1;
-            OnebOpen = 1;
-            
         }
+        GateNumber = 1;
+        OnebOpen = 1;
+
+    }
+    if (currentTopCQ == 590 && currentLeftCQ == 540) {
+        if (TwobOpen == 0) {
+            Gate2b.style.display = 'block';
+            neueFrage();
+        }
+        GateNumber = 2;
+        TwobOpen = 1;
+
+    }
+    if (currentTopCQ == 515 && currentLeftCQ == 915) {
+        if (ThreebOpen == 0) {
+            Gate3b.style.display = 'block';
+            neueFrage();
+        }
+        GateNumber = 3;
+        ThreebOpen = 1;
+
     }
     //TP
-    if(currentTopCQ >= 215 && currentTopCQ <= 290){
-        if(currentLeftCQ >= 540 && currentLeftCQ <= 615){
+    if (currentTopCQ >= 215 && currentTopCQ <= 290) {
+        if (currentLeftCQ >= 540 && currentLeftCQ <= 615) {
             Key.style.display = 'none';
             SignKey.style.display = 'block';
             KeyCollected = true;
@@ -104,9 +125,9 @@ function CheckQuestion (){
         }
     }
     //KeyDoor
-    if(KeyCollected == true){
-        if (currentLeftCQ == 390){
-            if (currentTopCQ == 740){
+    if (KeyCollected == true) {
+        if (currentLeftCQ == 390) {
+            if (currentTopCQ == 740) {
                 KeyDoor.style.display = 'none';
                 SignKey.style.display = 'none';
             }
@@ -119,39 +140,39 @@ function CheckQuestion (){
 
 //Functions für Hitbox
 
-    //Player Hitbox
-    function getRect(element) {
-        return element.getBoundingClientRect();
-    }
+//Player Hitbox
+function getRect(element) {
+    return element.getBoundingClientRect();
+}
 
-    function getReducedRect(element) {
-        const rect = getRect(element);
-        return {
-            top: rect.top + blockPadding,
-            bottom: rect.bottom - blockPadding - 10,
-            left: rect.left + blockPadding + 10,
-            right: rect.right - blockPadding - 10
-        };
-    }
+function getReducedRect(element) {
+    const rect = getRect(element);
+    return {
+        top: rect.top + blockPadding,
+        bottom: rect.bottom - blockPadding - 10,
+        left: rect.left + blockPadding + 10,
+        right: rect.right - blockPadding - 10
+    };
+}
 
-    function checkCollision(player, blocks, gates) {
-        const playerRect = getRect(player);
+function checkCollision(player, blocks, gates) {
+    const playerRect = getRect(player);
 
-        // Combine both walls and gates into one array
-        const allBlocks = [...blocks, ...gates];
+    // Combine both walls and gates into one array
+    const allBlocks = [...blocks, ...gates];
 
-        for (let block of allBlocks) {
-            const blockRect = getReducedRect(block);
+    for (let block of allBlocks) {
+        const blockRect = getReducedRect(block);
 
-            if (
-                playerRect.top <= blockRect.bottom && playerRect.bottom > blockRect.top &&
-                playerRect.right > blockRect.left && playerRect.left < blockRect.right
-            ) {
-                return true;
-            }
+        if (
+            playerRect.top <= blockRect.bottom && playerRect.bottom > blockRect.top &&
+            playerRect.right > blockRect.left && playerRect.left < blockRect.right
+        ) {
+            return true;
         }
-        return false;
     }
+    return false;
+}
 
 
 //Functions für Movement Player
@@ -214,4 +235,3 @@ document.addEventListener('keydown', function (event) {
             break;
     }
 });
-
