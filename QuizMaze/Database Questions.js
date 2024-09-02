@@ -1,3 +1,4 @@
+//Database for Questions
 const data = [{
         id: 1,
         frage: "Was ist die Hauptstadt von Frankreich?",
