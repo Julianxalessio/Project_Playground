@@ -49,14 +49,15 @@ function FrageFalsch() {
 }
 
 function check() {
-    const PlayerAntwort = document.getElementById("Answer").value;
-    const CheckAntwort = dataById.antwort;
-    document.getElementById("Answer").value = "";
+    const PlayerAntwort = document.getElementById("Answer").value.trim().toLowerCase(); // Eingabe des Benutzers in Kleinbuchstaben umwandeln und Leerzeichen entfernen
+    const CheckAntwort = dataById.antwort; // Antwortmöglichkeiten abrufen
+    document.getElementById("Answer").value = ""; // Eingabefeld leeren
 
     console.log(PlayerAntwort);
 
     if (Array.isArray(CheckAntwort)) {
-        if (CheckAntwort.includes(PlayerAntwort.toLowerCase())) {
+        // Wenn CheckAntwort ein Array ist
+        if (CheckAntwort.some(answer => answer.toLowerCase() === PlayerAntwort)) {
             console.log("Richtige Antwort!");
             FrageRichtig();
         } else {
@@ -64,7 +65,8 @@ function check() {
             FrageFalsch();
         }
     } else {
-        if (CheckAntwort.toLowerCase() === PlayerAntwort.toLowerCase()) {
+        // Wenn CheckAntwort eine einzelne Antwort ist
+        if (CheckAntwort.toLowerCase() === PlayerAntwort) {
             console.log("Richtige Antwort!");
             FrageRichtig();
         } else {
@@ -72,11 +74,10 @@ function check() {
             FrageFalsch();
         }
     }
-
 }
 
 function neueFrage() {
-    const randomNum = getRandomInt(1, 1);
+    const randomNum = getRandomInt(1, 300);
     dataById = getDataById(randomNum);
     if (dataById) {
         const frage = dataById.frage;
