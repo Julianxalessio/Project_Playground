@@ -4,6 +4,9 @@ let TwobOpen = 0;
 let ThreebOpen = 0;
 let GateNumber = 0;
 let KeyCollected = false;
+let isEnterPressed = false;
+
+
 
 
 //Functions für Fragen
@@ -16,7 +19,7 @@ function getRandomInt(min, max) {
 function FrageRichtig() {
     Rechnung.textContent = " ";
     TryOQ = 3;
-    Infos.textContent = "Leben: " + Lives + " Versuche: " + TryOQ;
+    Infos.textContent = "Leben: " + Lives + " Versuche: " + TryOQ + " neue Frage: " + Wechsel;
     Gate1b.style.display = 'none';
     Gate2b.style.display = 'none';
     Gate3b.style.display = 'none';
@@ -34,17 +37,25 @@ function getDataById(id) {
 
 function FrageFalsch() {
     TryOQ -= 1;
-    Infos.textContent = "Leben: " + Lives + " Versuche: " + TryOQ;
+    Infos.textContent = "Leben: " + Lives + " Versuche: " + TryOQ + " neue Frage: " + Wechsel;
     if (TryOQ === 0) {
         Lives -= 1;
         TryOQ = 3;
-        Infos.textContent = "Leben: " + Lives + " Versuche: " + TryOQ;
+        Infos.textContent = "Leben: " + Lives + " Versuche: " + TryOQ + " neue Frage: " + Wechsel;
         document.documentElement.style.setProperty('--top', '65px');
         document.documentElement.style.setProperty('--left', '600px');
 
         //Alle Tore werden zurückgesetzt
         Gate1b.style.display = 'none';
         OnebOpen = 0;
+        Gate2b.style.display = 'none';
+        TwobOpen = 0;
+        Gate3b.style.display = 'none';
+        OnebOpen = 0;
+        Gate1.style.display = 'block';
+        Gate2.style.display = 'block';
+        Gate3.style.display = 'block';
+
     }
 }
 
@@ -236,3 +247,26 @@ document.addEventListener('keydown', function (event) {
             break;
     }
 });
+
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'Enter' && !isEnterPressed) {
+        isEnterPressed = true; // Setze die Flagge auf true
+        console.log('Enter key pressed!');
+        check(); // Beispielaktion
+    }
+});
+
+document.addEventListener('keyup', function(event) {
+    if (event.key === 'Enter') {
+        isEnterPressed = false; // Setze die Flagge auf false
+    }
+});
+
+function WechselFrage(){
+    if (Wechsel >= 1){
+        Wechsel -= 1;
+        Infos.textContent = "Leben: " + Lives + " Versuche: " + TryOQ + " neue Frage: " + Wechsel;
+        neueFrage();
+
+    }
+}

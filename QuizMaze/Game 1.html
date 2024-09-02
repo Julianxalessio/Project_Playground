@@ -49,12 +49,16 @@
     <img id="Gate3b" class="Gates" src="First Wall.png" alt="Test Block">
 
     <button id="Ok" onclick="check()">Ok</button>
+    <button id="Wechsler" onclick="WechselFrage()">Ok</button>
+
+    
     <script src="../JS Files/CloseButton.js"></script>
     <script src="Database Questions.js"></script>
     <script src="FunctionsGame1.js"></script>
     <script>
         let TryOQ = 3;
         let Lives = 3;
+        let Wechsel = 3;
         let randomInt = getRandomInt(1, 10);
         let dataById = null;
         const blockPadding = 15; // Padding für die Verkleinerung der Hitbox des Blocks !!! NICHT ÄNDERN !!!
@@ -67,9 +71,15 @@
 
 
         //JS Objekte
-        var Rechnung = document.createElement("big");
-        Rechnung.id = "FrageOutput";
-        Rechnung.textContent = " ";
+        var Rechnung = document.createElement("textarea");
+        Rechnung.id = "FrageOutput"; // Setze die ID
+        Rechnung.readOnly = true; // Setze das Textarea auf "nur lesbar"
+        Rechnung.textContent = " "; // Leerer Inhalt
+        Rechnung.style.width = "300px"; // Setze die Breite (optional)
+        Rechnung.style.height = "50px"; // Setze die Höhe (optional)
+        Rechnung.style.resize = "none"; // Deaktiviere das Verändern der Größe (optional)
+        Rechnung.style.backgroundColor = "#f0f0f0"; // Setze den Hintergrund (optional)
+        Rechnung.style.border = "1px solid #ccc";
         document.body.appendChild(Rechnung);
 
         var Input = document.createElement("input");
@@ -79,7 +89,7 @@
 
         const Infos = document.createElement("big");
         Infos.id = "Infos";
-        Infos.textContent = "Leben: " + Lives + " Versuche: " + TryOQ;
+        Infos.textContent = "Leben: " + Lives + " Versuche: " + TryOQ + " neue Frage: " + Wechsel;
         document.body.appendChild(Infos);
 
         localStorage.setItem('quizData', JSON.stringify(data));
