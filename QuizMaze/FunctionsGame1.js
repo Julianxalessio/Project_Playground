@@ -267,6 +267,5 @@ function WechselFrage(){
         Wechsel -= 1;
         Infos.textContent = "Leben: " + Lives + " Versuche: " + TryOQ + " neue Frage: " + Wechsel;
         neueFrage();
-
     }
 }
