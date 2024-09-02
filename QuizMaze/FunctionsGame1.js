@@ -5,6 +5,8 @@ let ThreebOpen = 0;
 let GateNumber = 0;
 let KeyCollected = false;
 
+//Test Branches
+
 
 //Functions für Fragen
 function getRandomInt(min, max) {
