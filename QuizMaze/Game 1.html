@@ -47,15 +47,24 @@
     <img id="Gate2b" class="Gates" src="First Wall.png" alt="Test Block">
     <img id="Gate3" class="Gates" src="QuestionGate.png" alt="Test Block">
     <img id="Gate3b" class="Gates" src="First Wall.png" alt="Test Block">
+    <img id="Gate4" class="Gates" src="QuestionGate.png" alt="Test Block">
+    <img id="Gate4b" class="Gates" src="First Wall.png" alt="Test Block">
+    <img id="Gate5" class="Gates" src="QuestionGate.png" alt="Test Block">
+    <img id="Gate5b" class="Gates" src="First Wall.png" alt="Test Block">
 
     <button id="Ok" onclick="check()">Ok</button>
     <button id="Wechsler" onclick="WechselFrage()">Ok</button>
+
+    <button id="Wechsler" onclick="Hitbox=true">Hitbox on</button>
+    <button id="Wechsler" onclick="Hitbox=false">Hitbox off</button>
+
 
     
     <script src="../JS Files/CloseButton.js"></script>
     <script src="Database Questions.js"></script>
     <script src="FunctionsGame1.js"></script>
     <script>
+        let Hitbox = true;
         let TryOQ = 3;
         let Lives = 3;
         let Wechsel = 3;
@@ -67,6 +76,9 @@
         Gate1b.style.display = 'none';
         Gate2b.style.display = 'none';
         Gate3b.style.display = 'none';
+        Gate4b.style.display = 'none';
+        Gate5b.style.display = 'none';
+
 
 
         //JS Objekte

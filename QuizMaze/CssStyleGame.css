@@ -148,6 +148,26 @@
     left: 930px;
 }
 
+#Gate4 {
+    top: 85px;
+    left: 780px;
+}
+
+#Gate4b {
+    top: 85px;
+    left: 930px;
+}
+
+#Gate5 {
+    top: 460px;
+    left: 555px;
+}
+
+#Gate5b {
+    top: 460px;
+    left: 705px;
+}
+
 .Walls {
     position: absolute;
     height: 75px;

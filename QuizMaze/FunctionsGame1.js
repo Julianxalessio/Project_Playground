@@ -2,6 +2,8 @@
 let OnebOpen = 0;
 let TwobOpen = 0;
 let ThreebOpen = 0;
+let FourbOpen = 0;
+let FivebOpen = 0;
 let GateNumber = 0;
 let KeyCollected = false;
 let isEnterPressed = false;
@@ -23,6 +25,8 @@ function FrageRichtig() {
     Gate1b.style.display = 'none';
     Gate2b.style.display = 'none';
     Gate3b.style.display = 'none';
+    Gate4b.style.display = 'none';
+    Gate5b.style.display = 'none';
 
     const gateElement = document.getElementById(`Gate${GateNumber}`);
     if (gateElement) {
@@ -46,15 +50,25 @@ function FrageFalsch() {
         document.documentElement.style.setProperty('--left', '600px');
 
         //Alle Tore werden zurückgesetzt
+        Gate1.style.display = 'block';
         Gate1b.style.display = 'none';
         OnebOpen = 0;
+
+        Gate2.style.display = 'block';
         Gate2b.style.display = 'none';
         TwobOpen = 0;
-        Gate3b.style.display = 'none';
-        OnebOpen = 0;
-        Gate1.style.display = 'block';
-        Gate2.style.display = 'block';
+
         Gate3.style.display = 'block';
+        Gate3b.style.display = 'none';
+        ThreebOpen = 0;
+        
+        Gate4.style.display = 'block';
+        Gate5b.style.display = 'none';
+        FourbOpen = 0;
+
+        Gate5.style.display = 'block';
+        Gate5b.style.display = 'none';
+        FivebOpen = 0;
 
     }
 }
@@ -88,7 +102,7 @@ function check() {
 }
 
 function neueFrage() {
-    const randomNum = getRandomInt(1, 300);
+    const randomNum = getRandomInt(1, 1);
     dataById = getDataById(randomNum);
     if (dataById) {
         const frage = dataById.frage;
@@ -127,6 +141,25 @@ function CheckQuestion() {
         ThreebOpen = 1;
 
     }
+    if (currentTopCQ == 65 && currentLeftCQ == 840) {
+        if (FourbOpen == 0) {
+            Gate4b.style.display = 'block';
+            neueFrage();
+        }
+        GateNumber = 4;
+        FourbOpen = 1;
+
+    }
+    if (currentTopCQ == 440 && currentLeftCQ == 615) {
+        if (FivebOpen == 0) {
+            Gate5b.style.display = 'block';
+            neueFrage();
+        }
+        GateNumber = 5;
+        FivebOpen = 1;
+
+    }
+
     //TP
     if (currentTopCQ >= 215 && currentTopCQ <= 290) {
         if (currentLeftCQ >= 540 && currentLeftCQ <= 615) {
@@ -221,12 +254,14 @@ function movePlayer(direction) {
     document.documentElement.style.setProperty('--left', `${newLeft}px`);
 
     // Check for collision with both walls and gates
-    const collision = checkCollision(player, walls, gates);
+    if (Hitbox == true){
+        const collision = checkCollision(player, walls, gates);
 
-    if (collision) {
-        // Revert to the previous position if there's a collision
-        document.documentElement.style.setProperty('--top', `${currentTop}px`);
-        document.documentElement.style.setProperty('--left', `${currentLeft}px`);
+        if (collision) {
+            // Revert to the previous position if there's a collision
+            document.documentElement.style.setProperty('--top', `${currentTop}px`);
+            document.documentElement.style.setProperty('--left', `${currentLeft}px`);
+        }
     }
 
 }
