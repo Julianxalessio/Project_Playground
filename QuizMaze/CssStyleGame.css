@@ -192,6 +192,12 @@
     top: 350px;
 }
 
+#Wechsler {
+    position: absolute;
+    left: 200px;
+    top: 350px;
+}
+
 #Infos {
     position: absolute;
     left: 10px;
