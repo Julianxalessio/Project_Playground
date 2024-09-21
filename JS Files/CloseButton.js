@@ -5,5 +5,5 @@ var Close = document.createElement("button");
     Close.onclick = Closer;
 
 function Closer() {
-    window.location.replace("../Hauptseite Test 1.html");
+    window.location.replace("../Hauptseite.html");
 }
