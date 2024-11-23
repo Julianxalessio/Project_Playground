@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sicherer Ordner</title>
+  <link rel="stylesheet" href="../CSS Files/CloseButton.css">
+  <link rel="stylesheet" href="../CSS Files/DarkModeSwitch.css">
+  <style>
+    body {
+      font-family: 'Arial', cursive, sans-serif;
+      transition: background-color 0.5s;
+      position: relative;
+      margin: 0;
+      padding: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Sicherer Ordner</h1>
+  <h2><small>Passwort:</small></h2>
+
+  <div id="dateiInhalt"></div>
+
+  <script defer>
+    let Passwort = 0;
+    const ChoosenPasswort = "Dagaz160809";
+
+    let setChoosenPasswort = () => {
+      ChoosenPasswort = prompt("Neues Passwort:");
+      alert("Passwort erfolgreich geändert!");
+    };
+
+    function controll() {
+      if (Passwort === ChoosenPasswort) {
+        Datei();
+      } else {
+        alert("Falsches Passwort")
+        passwortEingabeFeld.value = '';      
+      }
+    }
+
+    function Datei() {
+      let f = open("Passwort.txt");
+    }
+
+    let Operation = "Passwort eingeben";0
+
+
+    if (Operation == "Passwort eingeben") {
+      var passwortEingabeFeld = document.createElement("input");
+      passwortEingabeFeld.type = "password";
+      document.body.appendChild(passwortEingabeFeld);
+
+      var button = document.createElement("button");
+      button.innerHTML = "Ok";
+      button.onclick = function () {
+        Passwort = passwortEingabeFeld.value;
+        controll();
+      };
+      document.body.appendChild(button);
+    }
+
+  </script>
+  <script src="../JS Files/CloseButton.js"></script>
+  <script src="../JS Files/DarkModeSwitch.js"></script>
+</body>
+
+</html>

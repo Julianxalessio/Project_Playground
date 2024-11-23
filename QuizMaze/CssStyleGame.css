@@ -1,0 +1,207 @@
+:root {
+    --top: 65px;
+    --left: 600px;
+    --transform: scaleX(-1);
+}
+
+#Player {
+    max-width: 115px;
+    max-height: 115px;
+    position: absolute;
+    top: var(--top);
+    left: var(--left);
+    transform: var(--transform);
+    z-index: 2;
+}
+
+#Wall1 {
+    top: 10px;
+    left: 330px;
+    width: 1275px;
+}
+
+#Wall2 {
+    top: 10px;
+    left: 330px;
+    width: 75px;
+    height: 900px;
+}
+
+#Wall3 {
+    top: 85px;
+    left: 705px;
+    width: 75px;
+    height: 375px;
+}
+
+#Wall4 {
+    top: 160px;
+    left: 480px;
+    width: 225px;
+}
+
+#Wall5 {
+    top: 835px;
+    left: 330px;
+    width: 1275px;
+}
+
+#Wall6 {
+    top: 10px;
+    left: 1530px;
+    width: 75px;
+    height: 900px;
+}
+
+#Wall7 {
+    top: 235px;
+    left: 480px;
+    width: 75px;
+    height: 375px;
+}
+
+#Wall8 {
+    top: 685px;
+    left: 480px;
+    width: 75px;
+    height: 75px;
+}
+
+#Wall9 {
+    top: 535px;
+    left: 555px;
+    width: 375px;
+}
+
+#Wall10 {
+    top: 160px;
+    left: 855px;
+    width: 75px;
+    height: 375px;
+}
+
+#Wall11 {
+    top: 385px;
+    left: 630px;
+    width: 75px;
+}
+
+#Wall12 {
+    top: 85px;
+    left: 1005px;
+    width: 75px;
+    height: 675px;
+}
+
+#Wall13 {
+    top: 685px;
+    left: 555px;
+    width: 450px;
+}
+
+#Wall14 {
+    top: 160px;
+    left: 1155px;
+    width: 75px;
+    height: 675px;
+}
+
+#Wall15 {
+    top: 160px;
+    left: 1230px;
+    width: 150px;
+}
+
+#Wall16 {
+    top: 685px;
+    left: 1230px;
+    width: 225px;
+}
+
+#Gate1 {
+    top: 160px;
+    left: 405px;
+}
+
+#Gate1b {
+    top: 85px;
+    left: 480px;
+}
+
+#Gate2 {
+    top: 610px;
+    left: 630px;
+}
+
+#Gate2b {
+    top: 610px;
+    left: 480px;
+}
+
+#Gate3 {
+    top: 460px;
+    left: 930px;
+}
+
+#Gate3b {
+    top: 610px;
+    left: 930px;
+}
+
+.Walls {
+    position: absolute;
+    height: 75px;
+}
+
+#FrageOutput {
+    position: absolute;
+    left: 10px;
+    top: 280px;
+    font-size: 16.5px;
+}
+
+#Answer {
+    position: absolute;
+    left: 10px;
+    top: 350px;
+}
+
+#Ok {
+    position: absolute;
+    left: 170px;
+    top: 350px;
+}
+
+#Infos {
+    position: absolute;
+    left: 10px;
+    top: 250px;
+}
+
+#Key {
+    position: absolute;
+    top: 280px;
+    left: 590px;
+    height: 75px;
+    width: 75px;
+    z-index: 1;
+}
+
+.Gates {
+    position: absolute;
+    height: 75px;
+    width: 75px;
+    opacity: 0.75;
+}
+
+#SignKey {
+    position: absolute;
+    top: 450px;
+    left: 10px;
+}
+
+#KeyDoor {
+    position: absolute;
+    top: 760px;
+    left: 480px;
+}

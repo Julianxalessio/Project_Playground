@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kontakte</title>
+    <link rel="stylesheet" href="../CSS Files/CloseButton.css">
+    <link rel="stylesheet" href="../CSS Files/DarkModeSwitch.css">
+
+    <style>
+        body {
+            font-family: 'Arial', cursive, sans-serif;
+            transition: background-color 0.5s;
+            position: relative;
+            margin: 0;
+            padding: 0;
+        }
+
+        #AllButton {
+            position: absolute;
+            bottom: 50px;
+            right: 10px;
+            padding: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Kontakte</h1>
+
+    <div id="results"></div>
+
+    <input type="text" id="searchInput" placeholder="">
+    <button onclick="Search()">Ok</button>
+
+    <script defer>
+        function Search() {
+            var angegeben = document.getElementById("searchInput").value;
+            showResults(angegeben);
+        }
+
+        function showResults(angegeben) {
+            let resultsContainer = document.getElementById('results');
+            let ausgabe = person[angegeben];
+
+            if (ausgabe) {
+                // Anzeige der Ergebnisse
+                resultsContainer.innerHTML = `<p>Vorname: ${ausgabe["Vorname"]}</p>`;
+                resultsContainer.innerHTML += `<p>Nachname: ${ausgabe["Nachname"]}</p>`;
+                resultsContainer.innerHTML += `<p>Telefonnummer: ${ausgabe["Telefonnummer"]}</p>`;
+                resultsContainer.innerHTML += `<p>E-Mail: ${ausgabe["E-Mail"]}</p>`;
+            } else {
+                resultsContainer.innerHTML = "Kontakt nicht gefunden.";
+            }
+        }
+
+        function init() {
+            let elem = document.getElementById('button')
+            elem.addEventListener('click', showResults)
+        }
+
+        let person = {};
+
+        person["Julian"] = new Object();
+        person["Julian"]["Vorname"] = "Julian";
+        person["Julian"]["Nachname"] = "Lombardo";
+        person["Julian"]["Telefonnummer"] = "076 749 67 88";
+        person["Julian"]["E-Mail"] = "julianxalessio@gmail.com";
+
+        person["Rafael"] = new Object();
+        person["Rafael"]["Vorname"] = "Rafael";
+        person["Rafael"]["Nachname"] = "Lombardo";
+        person["Rafael"]["Telefonnummer"] = "076 723 70 20";
+        person["Rafael"]["E-Mail"] = "rafaello.aurelio@gmail.com";
+
+        person["Tanja"] = new Object();
+        person["Tanja"]["Vorname"] = "Tanja";
+        person["Tanja"]["Nachname"] = "Lombardo";
+        person["Tanja"]["Telefonnummer"] = "076 341 42 24";
+        person["Tanja"]["E-Mail"] = "tanja.lombardo@hotmail.ch";
+
+        person["Maurizio"] = new Object();
+        person["Maurizio"]["Vorname"] = "Maurizio";
+        person["Maurizio"]["Nachname"] = "Lombardo";
+        person["Maurizio"]["Telefonnummer"] = "076 723 70 20";
+        person["Maurizio"]["E-Mail"] = "maurizio70@gmx.ch";
+
+        person["Monica"] = new Object();
+        person["Monica"]["Vorname"] = "Monica";
+        person["Monica"]["Nachname"] = "Gass";
+        person["Monica"]["Telefonnummer"] = "unknow";
+        person["Monica"]["E-Mail"] = "?am.gass@sunrise.ch?";
+
+        person["Fredy"] = new Object();
+        person["Fredy"]["Vorname"] = "Fredy";
+        person["Fredy"]["Nachname"] = "Gass";
+        person["Fredy"]["Telefonnummer"] = "unknow";
+        person["Fredy"]["E-Mail"] = "?am.gass@sunrise.ch?";
+
+        init();
+    </script>
+    <script src="../JS Files/CloseButton.js"></script>
+    <script src="../JS Files/DarkModeSwitch.js"></script>
+    <script src="../JS Files/Refresh.js"></script>
+</body>
+
+</html>

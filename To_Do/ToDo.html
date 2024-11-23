@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <link rel="stylesheet" href="../CSS Files/CloseButton.css"> 
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aufgabenliste mit "Done"-Button</title>
+  <style>
+    body {
+      font-family: 'Arial', cursive, sans-serif;
+      transition: background-color 0.5s;
+      margin: 0;
+      padding: 0;
+    }
+
+    .task-container,
+    .done-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-start;
+      padding: 10px;
+      max-height: 50vh;
+      overflow-y: auto;
+      width: 50%;
+      margin-bottom: 20px;
+    }
+
+    .task {
+      background-color: #f1f1f1;
+      color: #000;
+      padding: 5px 15px;
+      border-radius: 20px;
+      margin: 5px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 50%;
+    }
+
+    .button-container {
+      display: flex;
+      gap: 10px;
+    }
+
+    .input-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px;
+      position: fixed;
+      bottom: 0;
+      width: 50%;
+      background-color: #ddd;
+    }
+
+    #inputField {
+      margin-right: 10px;
+      height: 25px;
+      width: 100%;
+    }
+
+    .delete-button,
+    .check-button {
+      cursor: pointer;
+    }
+
+    details {
+      font-family: 'Arial', cursive, sans-serif;
+      /* Einheitliche Schriftart für details */
+      margin-top: 20px;
+      /* Optionaler Abstand oben */
+
+    }
+
+    summary {
+      font-family: 'Arial', cursive, sans-serif;
+      /* Einheitliche Schriftart für summary */
+      cursor: pointer;
+      /* Zeiger anzeigen, wenn über summary gefahren wird */
+
+    }
+  </style>
+</head>
+
+<body>
+
+  <h3>Offene Aufgaben</h3>
+  <div class="task-container" id="taskContainer"></div>
+
+  <details>
+    <summary>Erledigte Aufgaben</summary>
+    <div class="done-container" id="doneTasksContainer"></div>
+
+  </details>
+
+  <div class="input-container">
+    <input type="text" id="inputField" placeholder="Geben Sie hier Ihre Aufgabe ein...">
+    <button id="addTaskButton" class="button">Hinzufügen</button>
+  </div>
+
+  <script>
+    let taskIdCounter = 0;
+
+    // Funktion zum Laden der Aufgaben aus LocalStorage
+    function loadTasks() {
+      const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+      tasks.forEach(task => addTask(task.text, task.id, task.done));
+    }
+
+    // Funktion zum Speichern der Aufgaben im LocalStorage
+    function saveTasks() {
+      const tasks = [];
+      document.querySelectorAll('.task').forEach(task => {
+        const taskText = task.querySelector('span').textContent;
+        const taskId = task.id;
+        const isDone = task.closest('.done-container') !== null; // Check if task is in "done" container
+        tasks.push({
+          id: taskId,
+          text: taskText,
+          done: isDone
+        });
+      });
+      localStorage.setItem('tasks', JSON.stringify(tasks));
+    }
+
+    // Funktion zum Hinzufügen einer Aufgabe
+    function addTask(text, id = null, done = false) {
+      const task = document.createElement('div');
+      task.classList.add('task');
+
+      const taskText = document.createElement('span');
+      taskText.textContent = text;
+
+      const buttonContainer = document.createElement('div');
+      buttonContainer.classList.add('button-container');
+
+      const checkButton = document.createElement('button');
+      checkButton.textContent = '✓'; // Check-Symbol
+      checkButton.classList.add('check-button');
+
+      const deleteButton = document.createElement('button');
+      deleteButton.textContent = '✗'; // Lösch-Symbol
+      deleteButton.classList.add('delete-button');
+
+      if (!id) {
+        taskIdCounter++;
+        id = `task-${taskIdCounter}`;
+      }
+      task.id = id;
+
+      // Event: Aufgabe löschen
+      deleteButton.addEventListener('click', () => {
+        task.remove(); // Aufgabe aus dem DOM entfernen
+        saveTasks(); // Aufgabenliste nach dem Löschen neu speichern
+      });
+
+      // Event: Aufgabe als erledigt markieren und verschieben
+      checkButton.addEventListener('click', () => {
+        const isChecked = task.dataset.checked === 'true'; // Prüfen, ob die Aufgabe als erledigt markiert ist
+
+        if (!isChecked) {
+          const doneContainer = document.getElementById('doneTasksContainer');
+          doneContainer.appendChild(task); // Aufgabe in den "Erledigt"-Bereich verschieben
+          task.dataset.checked = 'true'; // Status der Aufgabe auf erledigt setzen
+          checkButton.textContent = '↺'; // Check-Symbol zu ↺ ändern
+        } else {
+          const taskContainer = document.getElementById('taskContainer');
+          taskContainer.appendChild(task); // Aufgabe in den offenen Aufgabenbereich verschieben
+          task.dataset.checked = 'false'; // Status der Aufgabe auf nicht erledigt setzen
+          checkButton.textContent = '✓'; // Check-Symbol zurück zu ✓ ändern
+        }
+
+        saveTasks(); // Aufgabenliste nach dem Verschieben speichern
+      });
+
+
+      buttonContainer.appendChild(checkButton);
+      buttonContainer.appendChild(deleteButton);
+
+      task.appendChild(taskText);
+      task.appendChild(buttonContainer);
+
+      if (done) {
+        document.getElementById('doneTasksContainer').appendChild(task);
+      } else {
+        document.getElementById('taskContainer').appendChild(task);
+      }
+
+      saveTasks(); // Speichern der Aufgaben im LocalStorage
+    }
+
+    // Funktion zum Hinzufügen einer neuen Aufgabe beim Klick auf den Button
+    document.getElementById('addTaskButton').addEventListener('click', function () {
+      const userInput = document.getElementById('inputField').value.trim();
+      if (userInput === '') return;
+      addTask(userInput);
+      document.getElementById('inputField').value = ''; // Eingabefeld leeren
+    });
+
+    // Event zum Hinzufügen einer neuen Aufgabe bei "Enter"
+    document.getElementById('inputField').addEventListener('keypress', function (event) {
+      if (event.key === 'Enter') {
+        const userInput = document.getElementById('inputField').value.trim();
+        if (userInput === '') return;
+        addTask(userInput);
+        document.getElementById('inputField').value = ''; // Eingabefeld leeren
+      }
+    });
+
+    // Aufgaben aus LocalStorage laden beim Laden der Seite
+    loadTasks();
+  </script>
+  <script src="../JS Files/CloseButton.js"></script>
+
+</body>
+
+</html>

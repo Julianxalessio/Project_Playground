@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stoppuhr</title>
+  <link rel="stylesheet" href="../CSS Files/CloseButton.css">
+  <link rel="stylesheet" href="../CSS Files/DarkModeSwitch.css">
+  <style>
+    body {
+      font-family: 'Arial', cursive, sans-serif;
+      transition: background-color 0.5s;
+      position: relative;
+      margin: 0;
+      padding: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Stoppuhr</h1>
+
+  <button id="StSp" onclick="toggleStartStop()">Start</button>
+  <button id="Refresh" onclick="refresh()">Clear</button>
+
+  <div id="dateiInhalt"></div>
+
+  <script defer>
+    function toggleStartStop() {
+      isRunning = !isRunning;
+      if (isRunning) {
+        StSp.innerHTML = "Stop";
+        intervalId = setInterval(updateCounter, 1000); // Aktualisiert den Zähler alle 1000 Millisekunden (1 Sekunde)
+      } else {
+        StSp.innerHTML = "Start";
+        clearInterval(intervalId); // Stoppt das Intervall, wenn der Benutzer auf "Stop" klickt
+      }
+    }
+    function updateCounter() {
+      Time++;
+      Counter.innerHTML = Time;
+    }
+    function refresh () {
+      location.reload();
+    }
+
+    let Time = 0;
+    let intervalId;
+    let isRunning = false;
+
+    var Counter = document.createElement("button");
+    Counter.id = "Counter";
+    Counter.innerHTML = Time;
+    document.body.appendChild(Counter);
+
+  </script>
+  <script src="../JS Files/CloseButton.js"></script>
+  <script src="../JS Files/DarkModeSwitch.js"></script>
+
+</body>
+
+</html>

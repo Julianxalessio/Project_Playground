@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <title>Musikbibliothek</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      text-align: center;
+    }
+
+    #closeButton {
+      position: absolute;
+      bottom: 20px;
+      right: 10px;
+      padding: 10px;
+      font-size: 13px;
+    }
+
+    form {
+      margin-bottom: 20px;
+    }
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    li {
+  margin: 10px 0;
+  padding: 10px;
+  border: 2px solid #000000; /* Rahmen um den Song */
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  transition: background-color 0.3s;
+  max-width: 500px; /* Maximale Breite für die Songs */
+  margin-left: auto;
+  margin-right: auto; /* Zentriert die Listeneinträge */
+}
+
+
+    button {
+      margin-left: 10px;
+      padding: 5px;
+      font-size: 14px;
+      background-color: transparent;
+      color: #000000;
+      border: 1px solid #000000;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      
+    }
+
+    button:hover {
+      background-color: #000000;
+      color: white;
+    }
+
+    audio {
+      margin-top: 10px;
+      width: 100%;
+      max-width: 400px;
+    }
+
+    #songName {
+      font-size: 18px;
+      margin-top: 10px;
+      word-wrap: break-word;
+      max-width: 400px;
+    }
+
+    #Player {
+      position: absolute;
+      bottom: 10px;
+    }
+
+    #prevButton,
+    #nextButton {
+      max-width: 25px;
+      max-height: auto;
+    }
+
+    .play-button i {
+      font-size: 24px;
+    }
+
+    .play-button {
+      font-size: 16px;
+      padding: 10px;
+      background-color: transparent;
+      color: #000000;
+      border: none;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Musikbibliothek</h1>
+
+  <h2>Hochgeladene Dateien</h2>
+  <ul id="fileList"></ul>
+
+  <div id="Player">
+    <h3 id="songName">Kein Song ausgewählt</h3>
+    <audio id="audioPlayer" controls>
+      Dein Browser unterstützt kein Audio-Element.
+    </audio>
+
+    <div id="NPButton" style="margin-top: 10px;">
+      <img src="Previous.png" id="prevButton" onclick="playPreviousSong()" alt="Previous">
+      <img src="Previous.png" id="nextButton" style="transform: scaleX(-1)" onclick="playNextSong()" alt="Next">
+    </div>
+  </div>
+
+  <script>
+    // Liste von Musikdateien im Ordner "MP3"
+    const playlist = [
+      "MP3/Gravedigger.mp3",
+      "MP3/Head Underwater.mp3",
+    ];
+    const audioPlayer = document.getElementById("audioPlayer");
+audioPlayer.volume = 0.5;
+
+
+    let currentSongIndex = 0;
+
+    // Dateien beim Laden der Seite anzeigen
+    window.onload = () => {
+      const fileList = document.getElementById("fileList");
+      playlist.forEach((file, index) => {
+        const li = document.createElement("li");
+        li.innerHTML = `
+          ${file.split('/')[1]}  
+          <button class="play-button" onclick="playAudio(${index})">
+            <i class="fas fa-play"></i>
+          </button>
+        `;
+        fileList.appendChild(li);
+      });
+    };
+
+    // Audio abspielen
+    function playAudio(index) {
+      currentSongIndex = index;
+      audioPlayer.src = playlist[currentSongIndex];
+      audioPlayer.play();
+      document.getElementById("songName").innerHTML = `Aktuell abgespielt:<br>${playlist[currentSongIndex].split('/').pop()}`;
+    }
+
+    // Zum nächsten Song springen
+    function playNextSong() {
+      currentSongIndex = (currentSongIndex + 1) % playlist.length; // Nächsten Song wählen
+      playAudio(currentSongIndex);
+    }
+
+    // Zum vorherigen Song springen oder neu starten
+    function playPreviousSong() {
+      const audioPlayer = document.getElementById("audioPlayer");
+
+      if (audioPlayer.currentTime <= 1) {
+        audioPlayer.currentTime = 0;
+        audioPlayer.play();
+      } else {
+        currentSongIndex = (currentSongIndex - 1 + playlist.length) % playlist.length;
+        playAudio(currentSongIndex);
+      }
+    }
+
+    // Automatisch nächsten Song abspielen, wenn der aktuelle endet
+    audioPlayer.addEventListener("ended", playNextSong);
+
+    var Close = document.createElement("button");
+    Close.id = "closeButton"; // Neu hinzugefügte ID für die Positionierung
+    Close.innerHTML = "Close";
+    document.body.appendChild(Close);
+    Close.onclick = Closer;
+
+    function Closer() {
+      window.location.replace("../index.html");
+    }
+
+  </script>
+</body>
+
+</html>

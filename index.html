@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hauptseite</title>
+
+  <link rel="icon" type="image/png" href="Logo.png">
+  <link rel="stylesheet" href="../CSS Files/DarkModeSwitch.css">
+  <link rel="stylesheet" href="index.css">
+
+  <style>
+    
+    body {
+      font-family: 'Arial', cursive, sans-serif;
+      transition: background-image 0.5s;
+      margin: 0;
+      padding: 0;
+      background-size: cover;
+      background-position: center;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    h1 {
+      font-size: 3em;
+      margin-bottom: 20px;
+    }
+
+    #uhrzeit {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 1.5em;
+    }
+
+    /* Grid-Container */
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      /* 4 gleich große Spalten */
+      gap: 20px;
+      /* Abstand zwischen den Elementen */
+      justify-items: center;
+      /* Zentriert horizontal */
+      align-items: center;
+      /* Zentriert vertikal */
+      margin-top: 50px;
+    }
+
+    /* App-Element: Logo und Text */
+    .app-item {
+      display: flex;
+      flex-direction: column;
+      /* Bild und Text untereinander */
+      align-items: center;
+      /* Zentriere horizontal */
+      justify-content: flex-start;
+      /* Alles am oberen Rand ausrichten */
+      height: 150px;
+      /* Gleiche Höhe für alle Elemente */
+    }
+
+    /* Einheitliche Bildgröße */
+    .app-item img {
+      height: 80px;
+      /* Einheitliche Höhe */
+      width: auto;
+      /* Proportionen beibehalten */
+      object-fit: contain;
+      /* Verhindert Verzerrung */
+      margin-bottom: 10px;
+      /* Abstand zwischen Bild und Text */
+    }
+
+    /* Text-Styling */
+    .app-item h3 {
+      text-align: center;
+      /* Zentriert den Text */
+      font-size: 14px;
+      /* Einheitliche Schriftgröße */
+      line-height: 1.2;
+      /* Zeilenhöhe */
+      max-width: 100px;
+      /* Begrenze die Textbreite */
+      word-wrap: break-word;
+      /* Erzwinge Umbruch bei langen Wörtern */
+    }
+
+    /* Spezifische Anpassung für "Sicherer Ordner" */
+    .app-item.sicherer-ordner h3 {
+      white-space: pre-line;
+      /* Zeilenumbruch erzwingen */
+      max-width: none;
+      /* Überschreibt Standardbreite */
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Apps</h1>
+  <div id="uhrzeit"></div>
+
+  <div class="grid-container">
+    <div class="app-item">
+      <img onclick="OpenVoice()" src="Assistant/Voice.png" alt="Voice Assistant">
+      <h3>Assistant</h3>
+    </div>
+    <div class="app-item">
+      <img  onclick="OpenSichererOrdner()" src="Sicherer Ordner/Sicherer Ordner.png" alt="Sicherer Ordner">
+      <h3>Sicherer Ordner</h3>
+    </div>
+    <div class="app-item">
+      <img  onclick="OpenZähler()" src="Zähler/Zähler.png" alt="Zähler">
+      <h3>Zähler</h3>
+    </div>
+    <div class="app-item">
+      <img onclick="OpenTimer()" src="Timer/Stoppuhr.png" alt="Stoppuhr">
+      <h3>Stoppuhr</h3>
+    </div>
+    <div class="app-item">
+      <img onclick="OpenSearch()" src="Search/Search.png" alt="Search">
+      <h3>Search</h3>
+    </div>
+    <div class="app-item">
+      <img onclick="OpenKontakte()" src="Kontakte/Kontakte.png" alt="Kontakte">
+      <h3>Kontakte</h3>
+    </div>
+    <div class="app-item">
+      <img onclick="OpenMathe()" src="Mathe Rätsel/Mathe-Rätsel.png" alt="Mathe Rätsel">
+      <h3>Mathe Rätsel</h3>
+    </div>
+    <div class="app-item">
+      <img onclick="OpenQuizMaze()" src="QuizMaze/Quiz-Maze.png" alt="Quiz Maze">
+      <h3>Quiz Maze</h3>
+    </div>
+    <div class="app-item">
+      <img onclick="OpenMusic()" src="Music/Music_Logo.png" alt="Music">
+      <h3>Music</h3>
+    </div>
+    <div class="app-item">
+      <img onclick="OpenToDo()" src="To_Do/ToDo_Logo.png" alt="ToDo">
+      <h3>ToDo</h3>
+    </div>
+  </div>
+
+
+  <script defer>
+    function OpenSichererOrdner() {
+      window.location.replace("Sicherer Ordner/Sicherer Ordner Test 12.html");
+    }
+
+    function OpenZähler() {
+      window.location.replace("Zähler/Zähler Test 1.html");
+    }
+
+    function OpenTimer() {
+      window.location.replace("Timer/Timer Test 1.html");
+    }
+
+    function OpenSearch() {
+      window.location.replace("Search/Search.html");
+    }
+
+    function OpenKontakte() {
+      window.location.replace("Kontakte/Kontakte Test 1.html");
+    }
+
+    function OpenMathe() {
+      window.location.replace("Mathe Rätsel/Mathe_Puzzle.html");
+    }
+
+    function OpenVoice() {
+      window.location.replace("Assistant/Test Voice.html");
+    }
+
+    function OpenQuizMaze() {
+      window.location.replace("QuizMaze/Game 1.html");
+    }
+
+    function OpenMusic() {
+      window.location.replace("Music/Music.html");
+    }
+
+    function OpenToDo() {
+      window.location.replace("To_Do/ToDo.html");
+    }
+
+    function uhrzeit() {
+      var jetzt = new Date(),
+        h = jetzt.getHours(),
+        m = jetzt.getMinutes(),
+        s = jetzt.getSeconds();
+      h = fuehrendeNull(h)
+      m = fuehrendeNull(m);
+      s = fuehrendeNull(s);
+      document.getElementById('uhrzeit').innerHTML = h + ':' + m + ':' + s;
+      setTimeout(uhrzeit, 500);
+    }
+
+    function fuehrendeNull(zahl) {
+      return (zahl < 10 ? '0' : '') + zahl;
+    }
+
+    uhrzeit();
+  </script>
+  <script src="../JS Files/DarkModeSwitch.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zähler</title>
+  <link rel="stylesheet" href="../CSS Files/CloseButton.css">
+  <link rel="stylesheet" href="../CSS Files/DarkModeSwitch.css">
+
+  <style>
+    body {
+      font-family: 'Arial', cursive, sans-serif;
+      transition: background-color 0.5s;
+      position: relative;
+      margin: 0;
+      padding: 0;
+    }
+
+    #Plus1Button {
+      position: absolute;
+      left: 76px
+    }
+
+    #ErgebnisButton {
+      position: absolute;
+      left: 36px
+    }
+
+    #Minus1Button {
+      position: absolute;
+      left: 1px
+    }
+
+    #Refresh {
+      position: absolute;
+      left: 101px
+    }
+
+    .button {
+      font-family: 'Arial', sans-serif;
+      font-size: 16px;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Zähler</h1>
+
+  <div id="dateiInhalt"></div>
+
+  <button id="Plus1Button" onclick="Add1()">+</button>
+  <button id="Minus1Button" onclick="Minus1()">-</button>
+
+  <script defer>
+    let StartZählerDarkMode = localStorage.getItem('ZählerDM') === 'true';
+    if (StartZählerDarkMode) {
+      document.body.classList.add('dark-mode');
+    } else {
+      document.body.classList.remove('dark-mode');
+    }
+    let Counter = 0;
+
+    function Add1() {
+      Counter += 1;
+      Ergebnis.innerHTML = Counter;
+    }
+
+    function Minus1() {
+      Counter -= 1;
+      Ergebnis.innerHTML = Counter;
+    }
+
+    var Ergebnis = document.createElement("button");
+    Ergebnis.id = "ErgebnisButton";
+    Ergebnis.innerHTML = Counter;
+    document.body.appendChild(Ergebnis);
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const container = document.createElement('div');
+      container.classList.add('container');
+
+      const label = document.createElement('label');
+      label.classList.add('switch');
+
+      const checkbox = document.createElement('input');
+      checkbox.type = 'checkbox';
+      checkbox.id = 'darkModeToggle';
+
+      const slider = document.createElement('span');
+      slider.classList.add('slider');
+
+      label.appendChild(checkbox);
+      label.appendChild(slider);
+
+      container.appendChild(label);
+      document.body.appendChild(container);
+
+      if (StartZählerDarkMode) {
+        document.body.classList.add('dark-mode');
+        checkbox.checked = true; 
+      } else {
+        document.body.classList.remove('dark-mode');
+        checkbox.checked = false; 
+      }
+
+      checkbox.addEventListener('change', function () {
+        if (this.checked) {
+          document.body.classList.add('dark-mode');
+          localStorage.setItem('ZählerDM', true);
+        } else {
+          document.body.classList.remove('dark-mode');
+          localStorage.setItem('ZählerDM', false);
+        }
+      });
+    });
+    
+  </script>
+  <script src="../JS Files/CloseButton.js"></script>
+  <script src="../JS Files/Refresh.js"></script>
+
+
+
+</body>
+
+</html>
