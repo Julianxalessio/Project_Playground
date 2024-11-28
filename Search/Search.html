@@ -31,7 +31,14 @@
     function Search() {
       var query = document.getElementById("searchInput").value;
       window.open("https://www.bing.com/search?q=" + query, "_blank");
+      document.getElementById('searchInput').value = ''; // Eingabefeld leeren
     }
+    document.getElementById('searchInput').addEventListener('keypress', function (event) {
+      if (event.key === 'Enter') {
+        Search();
+        document.getElementById('searchInput').value = ''; // Eingabefeld leeren
+      }
+    });
 
   </script>
   <script src="../JS Files/CloseButton.js"></script>

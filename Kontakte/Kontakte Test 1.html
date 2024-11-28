@@ -55,11 +55,6 @@
             }
         }
 
-        function init() {
-            let elem = document.getElementById('button')
-            elem.addEventListener('click', showResults)
-        }
-
         let person = {};
 
         person["Julian"] = new Object();
@@ -98,7 +93,13 @@
         person["Fredy"]["Telefonnummer"] = "unknow";
         person["Fredy"]["E-Mail"] = "?am.gass@sunrise.ch?";
 
-        init();
+        document.getElementById('searchInput').addEventListener('keypress', function (event) {
+            if (event.key === 'Enter') {
+                Search();
+                document.getElementById('searchInput').value = ''; // Eingabefeld leeren
+                console.log(angegeben);
+            }
+        });
     </script>
     <script src="../JS Files/CloseButton.js"></script>
     <script src="../JS Files/DarkModeSwitch.js"></script>
