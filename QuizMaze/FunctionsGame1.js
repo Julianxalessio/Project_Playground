@@ -233,16 +233,16 @@ function movePlayer(direction) {
 
 document.addEventListener('keydown', function (event) {
     switch (event.key.toLowerCase()) {
-        case 'w':
+        case 'ArrowUp':
             movePlayer('up');
             break;
-        case 'a':
+        case 'ArrowLeft':
             movePlayer('left');
             break;
-        case 's':
+        case 'ArrowDown':
             movePlayer('down');
             break;
-        case 'd':
+        case 'ArrowRight':
             movePlayer('right');
             break;
     }
