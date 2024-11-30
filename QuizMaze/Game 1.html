@@ -89,7 +89,7 @@
 
         const Infos = document.createElement("big");
         Infos.id = "Infos";
-        Infos.textContent = "Leben: " + Lives + " Versuche: " + TryOQ + " neue Frage: " + Wechsel;
+        Infos.textContent = "Leben: " + Lives + " ||" +" Versuche: " + TryOQ + " ||" +" neue Frage: " + Wechsel;
         document.body.appendChild(Infos);
 
         localStorage.setItem('quizData', JSON.stringify(data));

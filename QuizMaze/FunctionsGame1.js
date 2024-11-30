@@ -5,7 +5,7 @@ let ThreebOpen = 0;
 let GateNumber = 0;
 let KeyCollected = false;
 let isEnterPressed = false;
-
+let GameOver = false;
 
 
 
@@ -19,10 +19,11 @@ function getRandomInt(min, max) {
 function FrageRichtig() {
     Rechnung.textContent = " ";
     TryOQ = 3;
-    Infos.textContent = "Leben: " + Lives + " Versuche: " + TryOQ + " neue Frage: " + Wechsel;
+    Infos.textContent = "Leben: " + Lives + " ||" + " Versuche: " + TryOQ + " ||" + " neue Frage: " + Wechsel;
     Gate1b.style.display = 'none';
     Gate2b.style.display = 'none';
     Gate3b.style.display = 'none';
+    document.getElementById("Answer").value = ""; // Eingabefeld leeren
 
     const gateElement = document.getElementById(`Gate${GateNumber}`);
     if (gateElement) {
@@ -37,11 +38,16 @@ function getDataById(id) {
 
 function FrageFalsch() {
     TryOQ -= 1;
-    Infos.textContent = "Leben: " + Lives + " Versuche: " + TryOQ + " neue Frage: " + Wechsel;
+    const PlayerAntwortF = document.getElementById("Answer").value.trim().toLowerCase();
+    Infos.textContent = "Leben: " + Lives + " ||" + " Versuche: " + TryOQ + " ||" + " neue Frage: " + Wechsel;
+    alert(PlayerAntwortF + " ist falsch\n\nRichtig wäre: " + dataById.antwort.join(", "));
+    document.getElementById("Answer").value = ""; // Eingabefeld leeren
+    neueFrage();
+
     if (TryOQ === 0) {
         Lives -= 1;
         TryOQ = 3;
-        Infos.textContent = "Leben: " + Lives + " Versuche: " + TryOQ + " neue Frage: " + Wechsel;
+        Infos.textContent = "Leben: " + Lives + " ||" + " Versuche: " + TryOQ + " ||" + " neue Frage: " + Wechsel;
         document.documentElement.style.setProperty('--top', '65px');
         document.documentElement.style.setProperty('--left', '600px');
 
@@ -55,6 +61,8 @@ function FrageFalsch() {
         Gate1.style.display = 'block';
         Gate2.style.display = 'block';
         Gate3.style.display = 'block';
+        document.getElementById("Answer").value = ""; // Eingabefeld leeren
+        Rechnung.textContent = " ";
 
     }
 }
@@ -62,7 +70,7 @@ function FrageFalsch() {
 function check() {
     const PlayerAntwort = document.getElementById("Answer").value.trim().toLowerCase(); // Eingabe des Benutzers in Kleinbuchstaben umwandeln und Leerzeichen entfernen
     const CheckAntwort = dataById.antwort; // Antwortmöglichkeiten abrufen
-    document.getElementById("Answer").value = ""; // Eingabefeld leeren
+
 
     console.log(PlayerAntwort);
 
@@ -187,52 +195,56 @@ function checkCollision(player, blocks, gates) {
 }
 
 
+
+
 //Functions für Movement Player
-function movePlayer(direction) {
-    const player = document.getElementById('Player');
-    const walls = document.getElementsByClassName('Walls');
-    const gates = document.getElementsByClassName('Gates');
-    const currentTop = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--top'));
-    const currentLeft = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--left'));
+if (GameOver == false) {
+    function movePlayer(direction) {
+        const player = document.getElementById('Player');
+        const walls = document.getElementsByClassName('Walls');
+        const gates = document.getElementsByClassName('Gates');
+        const currentTop = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--top'));
+        const currentLeft = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--left'));
 
-    CheckQuestion();
+        CheckQuestion();
 
-    let newTop = currentTop;
-    let newLeft = currentLeft;
+        let newTop = currentTop;
+        let newLeft = currentLeft;
 
-    switch (direction) {
-        case 'up':
-            newTop -= 15;
-            break;
-        case 'down':
-            newTop += 15;
-            break;
-        case 'left':
-            newLeft -= 15;
-            document.documentElement.style.setProperty('--transform', 'scaleX(-1)');
-            break;
-        case 'right':
-            newLeft += 15;
-            document.documentElement.style.setProperty('--transform', 'scaleX(1)');
-            break;
+        switch (direction) {
+            case 'up':
+                newTop -= 15;
+                break;
+            case 'down':
+                newTop += 15;
+                break;
+            case 'left':
+                newLeft -= 15;
+                document.documentElement.style.setProperty('--transform', 'scaleX(-1)');
+                break;
+            case 'right':
+                newLeft += 15;
+                document.documentElement.style.setProperty('--transform', 'scaleX(1)');
+                break;
+        }
+
+        document.documentElement.style.setProperty('--top', `${newTop}px`);
+        document.documentElement.style.setProperty('--left', `${newLeft}px`);
+
+        // Check for collision with both walls and gates
+        const collision = checkCollision(player, walls, gates);
+
+        if (collision) {
+            // Revert to the previous position if there's a collision
+            document.documentElement.style.setProperty('--top', `${currentTop}px`);
+            document.documentElement.style.setProperty('--left', `${currentLeft}px`);
+        }
+
     }
-
-    document.documentElement.style.setProperty('--top', `${newTop}px`);
-    document.documentElement.style.setProperty('--left', `${newLeft}px`);
-
-    // Check for collision with both walls and gates
-    const collision = checkCollision(player, walls, gates);
-
-    if (collision) {
-        // Revert to the previous position if there's a collision
-        document.documentElement.style.setProperty('--top', `${currentTop}px`);
-        document.documentElement.style.setProperty('--left', `${currentLeft}px`);
-    }
-
-}
+};
 
 document.addEventListener('keydown', function (event) {
-    switch (event.key.toLowerCase()) {
+    switch (event.key) {
         case 'ArrowUp':
             movePlayer('up');
             break;
@@ -248,24 +260,23 @@ document.addEventListener('keydown', function (event) {
     }
 });
 
-document.addEventListener('keydown', function(event) {
+document.addEventListener('keydown', function (event) {
     if (event.key === 'Enter' && !isEnterPressed) {
         isEnterPressed = true; // Setze die Flagge auf true
-        console.log('Enter key pressed!');
         check(); // Beispielaktion
     }
 });
 
-document.addEventListener('keyup', function(event) {
+document.addEventListener('keyup', function (event) {
     if (event.key === 'Enter') {
         isEnterPressed = false; // Setze die Flagge auf false
     }
 });
 
-function WechselFrage(){
-    if (Wechsel >= 1){
+function WechselFrage() {
+    if (Wechsel >= 1) {
         Wechsel -= 1;
-        Infos.textContent = "Leben: " + Lives + " Versuche: " + TryOQ + " neue Frage: " + Wechsel;
+        Infos.textContent = "Leben: " + Lives + " ||" + " Versuche: " + TryOQ + " ||" + " neue Frage: " + Wechsel;
         neueFrage();
     }
 }
