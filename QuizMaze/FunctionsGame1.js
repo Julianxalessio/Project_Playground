@@ -1,4 +1,4 @@
-//Variablen
+// Variablen
 let OnebOpen = 0;
 let TwobOpen = 0;
 let ThreebOpen = 0;
@@ -6,10 +6,16 @@ let GateNumber = 0;
 let KeyCollected = false;
 let isEnterPressed = false;
 let GameOver = false;
+let controllerIndex = null;
+let upPressed = false;
+let downPressed = false;
+let leftPressed = false;
+let rightPressed = false;
+let isControllerActive = false;
+let moveTimeout = null;
+let isMoving = false;
 
-
-
-//Functions für Fragen
+// Functions für Fragen
 function getRandomInt(min, max) {
     min = Math.ceil(min);
     max = Math.floor(max);
@@ -54,7 +60,7 @@ function FrageFalsch() {
         document.documentElement.style.setProperty('--top', '65px');
         document.documentElement.style.setProperty('--left', '600px');
 
-        //Alle Tore werden zurückgesetzt
+        // Alle Tore werden zurückgesetzt
         Gate1b.style.display = 'none';
         OnebOpen = 0;
         Gate2b.style.display = 'none';
@@ -74,11 +80,9 @@ function check() {
     const PlayerAntwort = document.getElementById("Answer").value.trim().toLowerCase(); // Eingabe des Benutzers in Kleinbuchstaben umwandeln und Leerzeichen entfernen
     const CheckAntwort = dataById.antwort; // Antwortmöglichkeiten abrufen
 
-
     console.log(PlayerAntwort);
 
     if (Array.isArray(CheckAntwort)) {
-        // Wenn CheckAntwort ein Array ist
         if (CheckAntwort.some(answer => answer.toLowerCase() === PlayerAntwort)) {
             console.log("Richtige Antwort!");
             FrageRichtig();
@@ -87,7 +91,6 @@ function check() {
             FrageFalsch();
         }
     } else {
-        // Wenn CheckAntwort eine einzelne Antwort ist
         if (CheckAntwort.toLowerCase() === PlayerAntwort) {
             console.log("Richtige Antwort!");
             FrageRichtig();
@@ -158,7 +161,7 @@ function CheckQuestion() {
     }
 }
 
-//Player Hitbox
+// Player Hitbox
 function getRect(element) {
     return element.getBoundingClientRect();
 }
@@ -176,7 +179,6 @@ function getReducedRect(element) {
 function checkCollision(player, blocks, gates) {
     const playerRect = getRect(player);
 
-    // Combine both walls and gates into one array
     const allBlocks = [...blocks, ...gates];
 
     for (let block of allBlocks) {
@@ -230,17 +232,16 @@ function movePlayer(direction) {
         document.documentElement.style.setProperty('--top', `${newTop}px`);
         document.documentElement.style.setProperty('--left', `${newLeft}px`);
 
-        // Check for collision with both walls and gates
         const collision = checkCollision(player, walls, gates);
 
         if (collision) {
-            // Revert to the previous position if there's a collision
             document.documentElement.style.setProperty('--top', `${currentTop}px`);
             document.documentElement.style.setProperty('--left', `${currentLeft}px`);
         }
     };
 }
 
+// Tasten-Event-Listener
 document.addEventListener('keydown', function (event) {
     switch (event.key) {
         case 'ArrowUp':
@@ -260,21 +261,51 @@ document.addEventListener('keydown', function (event) {
 
 document.addEventListener('keydown', function (event) {
     if (event.key === 'Enter' && !isEnterPressed) {
-        isEnterPressed = true; // Setze die Flagge auf true
-        check(); // Beispielaktion
+        isEnterPressed = true; 
+        check();
     }
 });
 
 document.addEventListener('keyup', function (event) {
     if (event.key === 'Enter') {
-        isEnterPressed = false; // Setze die Flagge auf false
+        isEnterPressed = false;
     }
 });
 
-function WechselFrage() {
-    if (Wechsel >= 1) {
-        Wechsel -= 1;
-        Infos.textContent = "Leben: " + Lives + " ||" + " Versuche: " + TryOQ + " ||" + " neue Frage: " + Wechsel;
-        neueFrage();
+window.addEventListener("gamepadconnected", (event) => {
+    controllerIndex = event.gamepad.index;
+    console.log("Controller verbunden");
+    isControllerActive = true;
+    requestAnimationFrame(contollerMovement);
+});
+
+window.addEventListener("gamepaddisconnected", (event) => {
+    controllerIndex = null;
+    isControllerActive = false;
+    console.log("Controller getrennt");
+});
+
+function controllerMoveWithDelay(direction) {
+    if (isMoving) return; // Verhindert mehrfaches Starten
+
+    isMoving = true;
+    movePlayer(direction);
+
+    moveTimeout = setTimeout(() => {
+        isMoving = false;
+    }, 40); // Zeit hier ebenfalls anpassen
+}
+
+function contollerMovement() {
+    if (controllerIndex !== null && isControllerActive) {
+        const gamepad = navigator.getGamepads()[controllerIndex];
+        const buttons = gamepad.buttons;
+
+        if (buttons[3].pressed) controllerMoveWithDelay('up');
+        if (buttons[1].pressed) controllerMoveWithDelay('down');
+        if (buttons[0].pressed) controllerMoveWithDelay('left');
+        if (buttons[2].pressed) controllerMoveWithDelay('right');
+
+        requestAnimationFrame(contollerMovement);
     }
 }
