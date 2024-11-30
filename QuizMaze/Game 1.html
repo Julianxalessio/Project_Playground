@@ -52,7 +52,6 @@
     <button id="Ok" onclick="check()">Ok</button>
     <button id="Wechsler" onclick="WechselFrage()">Ok</button>
 
-    
     <script src="../JS Files/CloseButton.js"></script>
     <script src="Database Questions.js"></script>
     <script src="FunctionsGame1.js"></script>
@@ -63,11 +62,17 @@
         let dataById = null;
         const blockPadding = 15; // Padding für die Verkleinerung der Hitbox des Blocks !!! NICHT ÄNDERN !!!
 
+        const GameOverI = document.createElement("big");
+        GameOverI.id = "GameOverI";
+        GameOverI.textContent = "Game Over";
+        document.body.appendChild(GameOverI);
         //Styles None for Gates
         SignKey.style.display = 'none';
         Gate1b.style.display = 'none';
         Gate2b.style.display = 'none';
         Gate3b.style.display = 'none';
+        GameOverI.style.display = 'none';
+
 
 
         //JS Objekte
@@ -94,6 +99,8 @@
 
         localStorage.setItem('quizData', JSON.stringify(data));
     </script>
+    
+    
 </body>
 
 </html>

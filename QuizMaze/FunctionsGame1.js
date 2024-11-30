@@ -46,6 +46,9 @@ function FrageFalsch() {
 
     if (TryOQ === 0) {
         Lives -= 1;
+        if (Lives == 0) {
+            GameOverF();
+        }
         TryOQ = 3;
         Infos.textContent = "Leben: " + Lives + " ||" + " Versuche: " + TryOQ + " ||" + " neue Frage: " + Wechsel;
         document.documentElement.style.setProperty('--top', '65px');
@@ -155,11 +158,6 @@ function CheckQuestion() {
     }
 }
 
-
-
-
-//Functions für Hitbox
-
 //Player Hitbox
 function getRect(element) {
     return element.getBoundingClientRect();
@@ -194,12 +192,13 @@ function checkCollision(player, blocks, gates) {
     return false;
 }
 
+function GameOverF() {
+    GameOver = true;
+    GameOverI.style.display = 'block';
+}
 
-
-
-//Functions für Movement Player
-if (GameOver == false) {
-    function movePlayer(direction) {
+function movePlayer(direction) {
+    if (GameOver == false) {
         const player = document.getElementById('Player');
         const walls = document.getElementsByClassName('Walls');
         const gates = document.getElementsByClassName('Gates');
@@ -239,9 +238,8 @@ if (GameOver == false) {
             document.documentElement.style.setProperty('--top', `${currentTop}px`);
             document.documentElement.style.setProperty('--left', `${currentLeft}px`);
         }
-
-    }
-};
+    };
+}
 
 document.addEventListener('keydown', function (event) {
     switch (event.key) {

@@ -205,3 +205,10 @@
     top: 760px;
     left: 480px;
 }
+
+#GameOverI{
+    position: absolute;
+    top: 100px;
+    left: 10px;
+    font-size: 60px;
+}
