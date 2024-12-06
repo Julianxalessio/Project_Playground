@@ -47,11 +47,10 @@
             let Ergebnis = Break / MaxP;
             Ergebnis += 1;
 
-let gerundet = new Intl.NumberFormat('de-DE', {
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2
-}).format(Ergebnis); // "3,14" (String im deutschen Format)
-
+            let gerundet = new Intl.NumberFormat('de-DE', {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            }).format(Ergebnis); // "3,14" (String im deutschen Format)
 
             document.getElementById("Note").value = gerundet;
         }
