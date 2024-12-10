@@ -185,9 +185,14 @@
       updateUmdrehenText();  // Aktualisiere den Text nach einer korrekten Antwort
     }
     function neueZahl() {
-      Zahl1 = generateRandomNumber(1, 100);
-      Zahl2 = generateRandomNumber(1, 100);
       WasZahl = generateRandomNumber(1, 3);
+      if(WasZahl==3){
+      Zahl1 = generateRandomNumber(1, 10);
+      Zahl2 = generateRandomNumber(1, 10);
+      }else{
+      Zahl1 = generateRandomNumber(1, 200);
+      Zahl2 = generateRandomNumber(1, 200);
+      }
 
       if (WasZahl === 1) {
         Was = "+";
