@@ -46,11 +46,12 @@
             let FN = document.getElementById("FN").value;
           let SN = document.getElementById("SN").value;
             let Break = Volume * 3;
-            let Break2 = Break / FN / SN;
+            let Break2 = Break / FN;
+            let Result = Break2 / SN;
 
             
 
-            document.getElementById("Break2").value = gerundet;
+            document.getElementById("Note").value = Result;
         }
     </script>
     <script src="../JS Files/CloseButton.js"></script>
