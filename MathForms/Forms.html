@@ -49,10 +49,13 @@
             let Break2 = Break / FN;
             let Result = Break2 / SN;
 
-            
-
             document.getElementById("Note").value = Result;
         }
+        document.addEventListener('keydown', function (event) {
+    if (event.key === 'Enter') {
+        Submit();
+    }
+});
     </script>
     <script src="../JS Files/CloseButton.js"></script>
     <script src="../JS Files/DarkModeSwitch.js"></script>
