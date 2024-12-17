@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stoppuhr</title>
+    <link rel="icon" alt="Logo" href="Stoppuhr.png">
+    <link rel="stylesheet" href="../CSS Files/CloseButton.css">
+    <link rel="stylesheet" href="../CSS Files/DarkModeSwitch.css">
+    <style>
+        body {
+            font-family: 'Arial', cursive, sans-serif;
+            transition: background-color 0.5s;
+            position: relative;
+            margin: 0;
+            padding: 0;
+        }
+
+        input {
+            margin-left: 10px;
+            padding: 5px;
+            font-size: 14px;
+            background-color: transparent;
+            color: #000000;
+            border: 1px solid #000000;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Noten</h1>
+    <ul>
+        <li id="Kugel" onclick="Kugel()">Kugel</li>
+        <li id="Pyramide" onclick="Pyramide()">Pyramide</li>
+
+    </ul>
+
+    <script>
+        function Kugel(){
+            window.location.replace("Kugel.html")
+        }
+        function Pyramide(){
+            window.location.replace("Pyramide.html")
+        }
+        
+    </script>
+    
+    <script src="../JS Files/CloseButton.js"></script>
+
+</body>
+
+</html>

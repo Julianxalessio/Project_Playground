@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pyramide</title>
+    <link rel="stylesheet" href="../CSS Files/CloseButton.css">
+    <link rel="stylesheet" href="../CSS Files/DarkModeSwitch.css">
+    <style>
+        body {
+            font-family: 'Arial', cursive, sans-serif;
+            transition: background-color 0.5s;
+            position: relative;
+            margin: 0;
+            padding: 0;
+        }
+
+        input {
+            padding: 5px;
+            font-size: 14px;
+            background-color: transparent;
+            color: #000000;
+            border: 1px solid #000000;
+            border-radius: 4px;
+        }
+
+        #VGH {
+            position: absolute;
+            top: 60px;
+            left: 10px;
+        }
+        #Gab {
+            position: absolute;
+            top: 160px;
+            left: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Pyramide</h1>
+
+    <div id="VGH">
+        <h3>Volumen, Grundfläche und Höhe</h3>
+        <input id="V" type="text" placeholder="Volumen">
+        <input id="G" type="text" placeholder="Grundfläche">
+        <input id="H" type="text" placeholder="Höhe">
+    </div>
+    <div id="Gab">
+        <h3>Grundfläche</h3>
+        <input id="g" type="text" placeholder="Grundfläche">
+        <input id="a" type="text" placeholder="a">
+        <input id="b" type="text" placeholder="b">
+    </div>
+
+    <script defer>
+        document.getElementById("VGH").addEventListener('keydown', function (event) {
+            if (event.key === 'Enter') {
+                SubmitVGH();
+            }
+        });
+        document.getElementById("Gab").addEventListener('keydown', function (event) {
+            if (event.key === 'Enter') {
+                SubmitGab();
+            }
+            if (event.ctrlKey && event.key === "d"){
+                event.preventDefault();
+                document.getElementById("a").value = ""; // Eingabefeld leeren
+                document.getElementById("g").value = ""; // Eingabefeld leeren
+                document.getElementById("b").value = ""; // Eingabefeld leeren
+
+            }
+        });
+
+        function SubmitVGH() {
+            let Volumen = document.getElementById("V").value.trim();
+            let Grundfläche = document.getElementById("G").value.trim();
+            let Höhe = document.getElementById("H").value.trim();
+
+            let leereFelder = 0;
+            if (Volumen === "") leereFelder++;
+            if (Grundfläche === "") leereFelder++;
+            if (Höhe === "") leereFelder++;
+
+            if (leereFelder > 1) {
+                alert("Es gibt zu viele Unbekannte!");
+            } else if (Volumen === "") {
+                let ErgebnisVGH = (parseFloat(Grundfläche) * parseFloat(Höhe)) / 3;
+                document.getElementById("V").value = ErgebnisVGH.toFixed(2); // Auf zwei Dezimalstellen gerundet
+            } else if (Höhe === "") {
+                let ErgebnisVGH = (parseFloat(Volumen) * 3) / parseFloat(Grundfläche);
+                document.getElementById("H").value = ErgebnisVGH.toFixed(2);
+            } else if (Grundfläche === "") {
+                let ErgebnisVGH = (parseFloat(Volumen) * 3) / parseFloat(Höhe);
+                document.getElementById("G").value = ErgebnisVGH.toFixed(2);
+            }
+
+        }
+        function SubmitGab() {
+            let GrundflächeGab = document.getElementById("g").value.trim();
+            let b = document.getElementById("b").value.trim();
+            let a = document.getElementById("a").value.trim();
+
+            let leereFelder = 0;
+            if (GrundflächeGab === "") leereFelder++;
+            if (a === "") leereFelder++;
+            if (b === "") leereFelder++;
+
+            if (leereFelder > 1) {
+                alert("Es gibt zu viele Unbekannte!");
+            } else if (GrundflächeGab === "") {
+                let ErgebnisGab = (parseFloat(a) * parseFloat(b));
+                document.getElementById("g").value = ErgebnisGab.toFixed(2); 
+            } else if (b === "") {
+                let ErgebnisGab = (parseFloat(GrundflächeGab) / parseFloat(a));
+                document.getElementById("b").value = ErgebnisGab.toFixed(2); 
+            } else if (a === "") {
+                let ErgebnisGab = (parseFloat(GrundflächeGab) / parseFloat(b));
+                document.getElementById("a").value = ErgebnisGab.toFixed(2); 
+            }
+
+        }
+
+    </script>
+    <script src="../JS Files/CloseFroms.js"></script>
+    <script src="../JS Files/DarkModeSwitch.js"></script>
+
+</body>
+
+</html>

@@ -16,32 +16,139 @@
       margin: 0;
       padding: 0;
     }
+
+    #searchContainer {
+      display: flex;
+
+      justify-content: flex-start;
+      position: fixed;
+      /* Fixiert den Container am oberen Rand */
+      left: 0;
+      width: 100%;
+      padding: 10px;
+      /* Abstand von der oberen Seite */
+      background-color: #ffffff;
+      /* Hintergrundfarbe für besseren Kontrast */
+    }
+
+
+    #searchInput {
+      max-height: 25px;
+    }
+
+    #SearchHistory {
+      margin-left: 25%;
+      /* Verschiebt das Suchverlauf-Element nach rechts */
+    }
+
+    #SearchHistory p {
+      padding: 8px;
+      border: 1px solid #ccc;
+      cursor: pointer;
+      margin: 5px 0;
+    }
+
+    #SearchHistoryHeader {
+      display: flex;
+      justify-content: space-between;
+      /* Stellt sicher, dass die Elemente auf der gleichen Zeile sind */
+      align-items: center;
+      /* Vertikale Ausrichtung */
+      gap: 10px;
+      background-color: #ffffff;
+
+    }
+
+    #SearchHistoryHeader h3 {
+      margin: 0;
+      /* Entfernt Standardabstände */
+    }
+
+    #SearchHistoryHeader button {
+      padding: 5px 10px;
+      cursor: pointer;
+      margin-left: 10px;
+      /* Optional: Abstand zum Text */
+    }
   </style>
 </head>
 
 <body>
   <h1>Search</h1>
+  <div id="searchContainer">
+    <input type="text" id="searchInput" placeholder="Enter Search">
+    <button style="max-height: 30px;" onclick="Search()">Search</button>
+    <div id="SearchHistory">
+      <div id="SearchHistoryHeader">
+        <h3 id="h3">Search History</h3>
+        <button onclick="DeleteHistory()">Delete History</button>
+      </div>
+    </div>
+  </div>
 
-  <div id="dateiInhalt"></div>
-
-  <input type="text" id="searchInput" placeholder="Enter Search">
-  
-  <button onclick="Search()">Search</button>
 
   <script defer>
     function Search() {
-      var query = document.getElementById("searchInput").value;
-      window.open("https://www.bing.com/search?q=" + query, "_blank");
-      document.getElementById('searchInput').value = ''; // Eingabefeld leeren
+      const query = document.getElementById("searchInput").value.trim();
+      if (query) {
+        window.open("https://www.bing.com/search?q=" + encodeURIComponent(query), "_blank");
+        AddSearch(query); // Suchbegriff zur Liste hinzufügen
+        saveSearch(); // Suchverlauf speichern
+        document.getElementById('searchInput').value = ''; // Eingabefeld leeren
+      }
     }
+
     document.getElementById('searchInput').addEventListener('keypress', function (event) {
       if (event.key === 'Enter') {
         Search();
-        document.getElementById('searchInput').value = ''; // Eingabefeld leeren
       }
     });
 
+    function saveSearch() {
+      const searches = [];
+      // Alle Buttons im SearchHistory-Container durchgehen
+      document.querySelectorAll('#SearchHistory p').forEach(button => {
+        searches.push(button.textContent);
+      });
+      if (searches.length > 0) {
+        localStorage.setItem('search', JSON.stringify(searches)); // Nur speichern, wenn Suchbegriffe vorhanden sind
+      }
+    }
+
+    function AddSearch(query) {
+      const searchList = document.getElementById("SearchHistory");
+      const p = document.createElement("p");
+      p.textContent = query;
+
+      p.onclick = function () {
+        SearchLI(query);
+      };
+
+      searchList.appendChild(p);
+    }
+
+
+
+    function SearchLI(query) {
+      window.open("https://www.bing.com/search?q=" + encodeURIComponent(query), "_blank");
+      document.getElementById('searchInput').value = ''; // Eingabefeld leeren
+    }
+
+    function loadSearchHistory() {
+      const searches = JSON.parse(localStorage.getItem('search')) || []; // Suchverlauf abrufen oder leere Liste
+      searches.forEach(query => AddSearch(query)); // Jeden Suchbegriff erneut hinzufügen
+    }
+
+    function DeleteHistory() {
+      if (localStorage.getItem('search')) { // Prüfen, ob 'search' existiert
+        localStorage.removeItem('search'); // Nur 'search' aus dem Local Storage löschen
+        document.getElementById("SearchHistory").innerHTML = '<h3 id="h3">Search History</h3>'; // UI zurücksetzen
+      }
+    }
+
+    window.onload = loadSearchHistory;
   </script>
+
   <script src="../JS Files/CloseButton.js"></script>
   <script src="../JS Files/DarkModeSwitch.js"></script>
 
