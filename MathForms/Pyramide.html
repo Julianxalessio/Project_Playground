@@ -70,6 +70,13 @@
             if (event.key === 'Enter') {
                 SubmitVGH();
             }
+            if (event.ctrlKey && event.key === "d"){
+                event.preventDefault();
+                document.getElementById("V").value = ""; // Eingabefeld leeren
+                document.getElementById("G").value = ""; // Eingabefeld leeren
+                document.getElementById("H").value = ""; // Eingabefeld leeren
+
+            }
         });
         document.getElementById("Gab").addEventListener('keydown', function (event) {
             if (event.key === 'Enter') {
