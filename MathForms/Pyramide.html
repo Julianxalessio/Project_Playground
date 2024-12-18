@@ -30,14 +30,22 @@
             top: 60px;
             left: 10px;
         }
+
         #Gab {
             position: absolute;
             top: 160px;
             left: 10px;
         }
+
         #rhs {
             position: absolute;
             top: 260px;
+            left: 10px;
+        }
+
+        #MNAHs {
+            position: absolute;
+            top: 360px;
             left: 10px;
         }
     </style>
@@ -55,14 +63,21 @@
     <div id="Gab">
         <h3>Grundfläche</h3>
         <input id="g" type="text" placeholder="Grundfläche">
-        <input id="a" type="text" placeholder="a">
+        <input id="1a" type="text" placeholder="a">
         <input id="b" type="text" placeholder="b">
     </div>
     <div id="rhs">
-        <h3>Radius, Höhe und Seite s</h3>
-        <input id="r" type="text" placeholder="Radius">
+        <h3>a/2, Höhe und Seite s</h3>
+        <input id="r" type="text" placeholder="a/2">
         <input id="h" type="text" placeholder="Höhe">
-        <input id="s" type="text" placeholder="Seite s">
+        <input id="s" type="text" placeholder="Höhe s">
+    </div>
+    <div id="MNAHs">
+        <h3>Mantelfläche, Eckenanzahl, Seite a und Höhe s</h3>
+        <input id="M" type="text" placeholder="Mantelfläche">
+        <input id="N" type="text" placeholder="Anzahl Ecken">
+        <input id="2a" type="text" placeholder="a">
+        <input id="hs" type="text" placeholder="Höhe s">
     </div>
 
     <script defer>
@@ -70,24 +85,49 @@
             if (event.key === 'Enter') {
                 SubmitVGH();
             }
-            if (event.ctrlKey && event.key === "d"){
+            if (event.ctrlKey && event.key === "d") {
                 event.preventDefault();
                 document.getElementById("V").value = ""; // Eingabefeld leeren
                 document.getElementById("G").value = ""; // Eingabefeld leeren
                 document.getElementById("H").value = ""; // Eingabefeld leeren
-
             }
         });
         document.getElementById("Gab").addEventListener('keydown', function (event) {
             if (event.key === 'Enter') {
                 SubmitGab();
             }
-            if (event.ctrlKey && event.key === "d"){
+            if (event.ctrlKey && event.key === "d") {
                 event.preventDefault();
-                document.getElementById("a").value = ""; // Eingabefeld leeren
+                document.getElementById("1a").value = ""; // Eingabefeld leeren
                 document.getElementById("g").value = ""; // Eingabefeld leeren
                 document.getElementById("b").value = ""; // Eingabefeld leeren
+            }
+        });
+        document.getElementById("rhs").addEventListener('keydown', function (event) {
+            if (event.key === 'Enter') {
+                Submitrhs();
+            }
+            if (event.ctrlKey && event.key === "d") {
+                event.preventDefault();
+                document.getElementById("r").value = ""; // Eingabefeld leeren
+                document.getElementById("h").value = ""; // Eingabefeld leeren
+                document.getElementById("s").value = ""; // Eingabefeld leeren
+            }
+        });
+        document.getElementById("MNAHs").addEventListener('keydown', function (event) {
+            if (event.key === 'Enter') {
+                console.log("4")
 
+                SubmitMNAHs();
+                console.log("3")
+
+            }
+            if (event.ctrlKey && event.key === "d") {
+                event.preventDefault();
+                document.getElementById("M").value = ""; // Eingabefeld leeren
+                document.getElementById("N").value = ""; // Eingabefeld leeren
+                document.getElementById("2a").value = ""; // Eingabefeld leeren
+                document.getElementById("hs").value = ""; // Eingabefeld leeren
             }
         });
 
@@ -115,32 +155,90 @@
             }
 
         }
+
         function SubmitGab() {
             let GrundflächeGab = document.getElementById("g").value.trim();
             let b = document.getElementById("b").value.trim();
-            let a = document.getElementById("a").value.trim();
+            let Ea = document.getElementById("1a").value.trim();
 
             let leereFelder = 0;
             if (GrundflächeGab === "") leereFelder++;
-            if (a === "") leereFelder++;
+            if (Ea === "") leereFelder++;
             if (b === "") leereFelder++;
 
             if (leereFelder > 1) {
                 alert("Es gibt zu viele Unbekannte!");
             } else if (GrundflächeGab === "") {
-                let ErgebnisGab = (parseFloat(a) * parseFloat(b));
-                document.getElementById("g").value = ErgebnisGab.toFixed(2); 
+                let ErgebnisGab = (parseFloat(Ea) * parseFloat(b));
+                document.getElementById("g").value = ErgebnisGab.toFixed(2);
             } else if (b === "") {
-                let ErgebnisGab = (parseFloat(GrundflächeGab) / parseFloat(a));
-                document.getElementById("b").value = ErgebnisGab.toFixed(2); 
-            } else if (a === "") {
+                let ErgebnisGab = (parseFloat(GrundflächeGab) / parseFloat(Ea));
+                document.getElementById("b").value = ErgebnisGab.toFixed(2);
+            } else if (Ea === "") {
                 let ErgebnisGab = (parseFloat(GrundflächeGab) / parseFloat(b));
-                document.getElementById("a").value = ErgebnisGab.toFixed(2); 
+                document.getElementById("1a").value = ErgebnisGab.toFixed(2);
             }
 
         }
 
+        function Submitrhs() {
+            let s = document.getElementById("s").value.trim();
+            let r = document.getElementById("r").value.trim();
+            let h = document.getElementById("h").value.trim();
+
+            let leereFelder = 0;
+            if (s === "") leereFelder++;
+            if (r === "") leereFelder++;
+            if (h === "") leereFelder++;
+
+            if (leereFelder > 1) {
+                alert("Es gibt zu viele Unbekannte!");
+            } else if (s === "") {
+                let Ergebnisrhs = Math.sqrt(parseFloat(r ** 2) + parseFloat(h ** 2));
+                document.getElementById("s").value = Ergebnisrhs.toFixed(2);
+            } else if (r === "") {
+                let Ergebnisrhs = Math.sqrt(parseFloat(s ** 2) - parseFloat(h ** 2));
+                document.getElementById("r").value = Ergebnisrhs.toFixed(2);
+            } else if (h === "") {
+                let Ergebnisrhs = Math.sqrt(parseFloat(s ** 2) - parseFloat(r ** 2));
+                document.getElementById("h").value = Ergebnisrhs.toFixed(2);
+            }
+        }
+
+        function SubmitMNAHs() {
+            let M = document.getElementById("M").value.trim();
+            let N = document.getElementById("N").value.trim();
+            let Za = document.getElementById("2a").value.trim();
+            let hs = document.getElementById("hs").value.trim();
+
+console.log("1")
+                let leereFelder = 0;
+                if (M === "") leereFelder++;
+                if (N === "") leereFelder++;
+                if (Za === "") leereFelder++;
+                if (hs === "") leereFelder++;
+
+                if (leereFelder > 1) {
+                    alert("Es gibt zu viele Unbekannte!");
+                    return;
+                } else if (M === "") {
+                    let ErgebnisM = 0.5 * parseFloat(N) * parseFloat(Za) * parseFloat(hs);
+                    document.getElementById("M").value = ErgebnisM.toFixed(2);
+                } else if (N === "") {
+                    let ErgebnisN = (2 * parseFloat(M)) / (parseFloat(Za) * parseFloat(hs));
+                    document.getElementById("N").value = ErgebnisN.toFixed(2);
+                } else if (Za === "") {
+                    console.log("2")
+
+                    let ErgebnisZa = (2 * parseFloat(M)) / (parseFloat(N) * parseFloat(hs));
+                    document.getElementById("2a").value = ErgebnisZa.toFixed(2);
+                } else if (hs === "") {
+                    let Ergebnishs = (2 * parseFloat(M)) / (parseFloat(N) * parseFloat(Za));
+                    document.getElementById("hs").value = Ergebnishs.toFixed(2);
+                }
+            }
     </script>
+
     <script src="../JS Files/CloseFroms.js"></script>
     <script src="../JS Files/DarkModeSwitch.js"></script>
 

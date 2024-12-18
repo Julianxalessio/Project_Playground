@@ -47,3 +47,16 @@
   input:checked + .slider:before {
     transform: translateX(26px);    
   }
+  .dark-mode {
+    background-color: black;
+    color: white;
+}
+
+.dark-mode input {
+    border-color: white; 
+    color: white;
+}
+.dark-mode button{
+    border-color: white; 
+    color: white;
+}
