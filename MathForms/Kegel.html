@@ -4,8 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stoppuhr</title>
-    <link rel="icon" alt="Logo" href="Stoppuhr.png">
+    <title>Pyramide</title>
     <link rel="stylesheet" href="../CSS Files/CloseButton.css">
     <link rel="stylesheet" href="../CSS Files/DarkModeSwitch.css">
     <style>
@@ -18,66 +17,84 @@
         }
 
         input {
-            margin-left: 10px;
             padding: 5px;
             font-size: 14px;
             background-color: transparent;
             color: #000000;
             border: 1px solid #000000;
             border-radius: 4px;
-            cursor: pointer;
-            transition: background-color 0.3s;
         }
-        #MNAHs {
+
+        #GR {
             position: absolute;
-            top: 360px;
+            top: 60px;
             left: 10px;
         }
+
+        #UR {
+            position: absolute;
+            top: 150px;
+            left: 10px;
+        }
+
+        #MRS {
+            position: absolute;
+            top: 240px;
+            left: 10px;
+        }
+        #VGH {
+            position: absolute;
+            top: 330px;
+            left: 10px;
+        }
+        #Alpha {
+            position: absolute;
+            top: 420px;
+            left: 10px;
+        }
+        
     </style>
 </head>
 
 <body>
-    <h1>Noten</h1>
+    <h1>Pyramide</h1>
+
+   
+    <div id="GR">
+        <h3>Grundfläche</h3>
+        <input id="G" type="text" placeholder="Grundfläche">
+        <input id="ER" type="text" placeholder="Radius">
+    </div>
     <div id="UR">
         <h3>Umfang</h3>
         <input id="U" type="text" placeholder="Umfang">
-        <input id="R" type="text" placeholder="Radius">
+        <input id="ZR" type="text" placeholder="Radius">
     </div>
-
+    <div id="MRS">
+        <h3>Mantelfläche</h3>
+        <input id="M" type="text" placeholder="Mantelfläche">
+        <input id="DR" type="text" placeholder="Radius">
+        <input id="S" type="text" placeholder="Höhe S">
+    </div>
+    <div id="VGH">
+        <h3>Volumen</h3>
+        <input id="V" type="text" placeholder="Volumen">
+        <input id="ZG" type="text" placeholder="Grundfläche">
+        <input id="H" type="text" placeholder="Höhe">
+    </div>
+    <div id="Alpha">
+        <h3>Alpha</h3>
+        <input id="A" type="text" placeholder="Alpha">
+        <input id="VR" type="text" placeholder="Radius">
+        <input id="ZS" type="text" placeholder="Höhe S">
+    </div>
+    <script src="JS Code Forms/FunktionsEventListener.js"></script>
+    <script src="JS Code Forms/FunktionsMath.js"></script>
     <script defer>
-        document.getElementById("UR").addEventListener('keydown', function (event) {
-            if (event.key === 'Enter') {
-                SubmitU();
-            }
-            if (event.ctrlKey && event.key === "d") {
-                event.preventDefault();
-                document.getElementById("R").value = ""; // Eingabefeld leeren
-                document.getElementById("U").value = ""; // Eingabefeld leeren
-            }
-        });
-
-        function SubmitU() {
-            let Umfang = document.getElementById("U").value.trim();
-            let Radius = document.getElementById("R").value.trim();
-
-            let leereFelder = 0;
-            if (Umfang === "") leereFelder++;
-            if (Radius === "") leereFelder++;
-            
-
-            if (leereFelder > 1) {
-                alert("Es gibt zu viele Unbekannte!");
-            } else if (Umfang === "") {
-                let ErgebnisU = (parseFloat(2) * parseFloat(Radius)) * Math.PI;
-                document.getElementById("U").value = ErgebnisU.toFixed(2); // Auf zwei Dezimalstellen gerundet
-            } else if (Radius === "") {
-                let ErgebnisU = parseFloat(Umfang) / Math.PI / 2;
-                document.getElementById("R").value = ErgebnisU.toFixed(2);
-            }
-
-        }
+        
     </script>
-    <script src="../JS Files/CloseFroms.js"></script>
+
+    <script src="JS Code Forms/CloseForms.js"></script>
     <script src="../JS Files/DarkModeSwitch.js"></script>
 
 </body>
