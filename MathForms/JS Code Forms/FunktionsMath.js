@@ -107,13 +107,13 @@ function SubmitAlpha() {
     if (leereFelder > 1) {
         alert("Es gibt zu viele Unbekannte!");
     } else if (Alpha === "") {
-        let ErgebnisA = parseFloat(VierRadius) / parseFloat(ZweiHöheS) * 360;
+        let ErgebnisA = (parseFloat(VierRadius) * 360) / parseFloat(ZweiHöheS);
                 document.getElementById("A").value = ErgebnisA.toFixed(2); // Auf zwei Dezimalstellen gerundet
     } else if (VierRadius === "") {
         let ErgebnisA = parseFloat(Alpha) / 360 * parseFloat(ZweiHöheS);
         document.getElementById("VR").value = ErgebnisA.toFixed(2);
     } else if (ZweiHöheS === "") {
-        let ErgebnisA = parseFloat(Alpha) / 360 * parseFloat(VierRadius);
+        let ErgebnisA = (parseFloat(VierRadius) * 360) / parseFloat(Alpha);
         document.getElementById("ZS").value = ErgebnisA.toFixed(2);
     }
 }
