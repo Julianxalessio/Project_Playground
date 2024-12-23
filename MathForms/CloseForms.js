@@ -5,5 +5,5 @@ var Close = document.createElement("button");
     Close.onclick = Closer;
 
 function Closer() {
-    window.location.replace("FormsHome.html");
+    window.location.replace("../FormsHome.html");
 }
