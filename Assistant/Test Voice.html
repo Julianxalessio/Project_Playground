@@ -1,173 +1,161 @@
 <!DOCTYPE html>
 <html lang="de">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Test Voice</title>
-<script src="https://code.responsivevoice.org/responsivevoice.js"></script>
-<link rel="stylesheet" href="../CSS Files/CloseButton.css">
-<link rel="stylesheet" href="../CSS Files/DarkModeSwitch.css">
-<link rel="icon" alt="Logo" href="Voice.png">
 
-<style>
-   body {
-     font-family: 'Arial', cursive, sans-serif;
-     transition: background-image 0.5s;
-     position: relative;
-     margin: 0;
-     padding: 0;
-     background-size: cover;
-     background-position: center;
-     height: 100vh;
-   }
-   .container{
-    position: absolute;
-    top: 20px;
-    right: 120px;
-    transform: translate(-50%, -50%);
-    text-align: center;
-  }
-   .chat-container {
-     display: flex;
-     flex-direction: column;
-     justify-content: flex-end;
-     align-items: flex-start;
-     padding: 0px;
-     height: calc(100% - 50px); /* adjust height based on other elements */
-     overflow-y: scroll;
-   }
-   .chat-bubble {
-     background-color: #f1f1f1;
-     color: #000;
-     padding: 5px 15px;
-     border-radius: 20px;
-     margin: 5px 0;
-     max-width: 70%;
-     word-wrap: break-word;
-   }
-   .user-input {
-     background-color: #4CAF50;
-     color: white;
-   }
-   .bot-response {
-     background-color: #008CBA;
-     color: white;
-   }
-   .input-container {
-     display: flex;
-     justify-content: space-between;
-     align-items: center;
-     padding: 10px;
-     background-color: #ddd;
-     position: fixed;
-     bottom: 0;
-   }
-   #inputField {
-     flex-grow: 1;
-     margin-right: 10px;
-     height: 25px;
-     width: 80%; /* Adjusted width */
-   }
-   #startVoice {
-     flex-shrink: 0;
-   }
-</style>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Test Voice</title>
+  <link rel="stylesheet" href="../CSS Files/CloseButton.css">
+  <link rel="stylesheet" href="../CSS Files/DarkModeSwitch.css">
+  <link rel="icon" alt="Logo" href="Voice.png">
+
+  <style>
+    body {
+      font-family: 'Arial', cursive, sans-serif;
+      transition: background-image 0.5s;
+      position: relative;
+      margin: 0;
+      padding: 0;
+      background-size: cover;
+      background-position: center;
+      height: 100vh;
+    }
+
+    .container {
+      position: absolute;
+      top: 20px;
+      right: 120px;
+      transform: translate(-50%, -50%);
+      text-align: center;
+    }
+
+    .chat-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: flex-start;
+      padding: 0px;
+      height: calc(100% - 50px);
+      overflow-y: scroll;
+    }
+
+    .chat-bubble {
+      background-color: #f1f1f1;
+      color: #000;
+      padding: 5px 15px;
+      border-radius: 20px;
+      margin: 5px 0;
+      max-width: 70%;
+      word-wrap: break-word;
+    }
+
+    .user-input {
+      background-color: #4CAF50;
+      color: white;
+    }
+
+    .bot-response {
+      background-color: #008CBA;
+      color: white;
+    }
+
+    .input-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px;
+      background-color: #ddd;
+      position: fixed;
+      bottom: 0;
+    }
+
+    #inputField {
+      flex-grow: 1;
+      margin-right: 10px;
+      height: 25px;
+      width: 80%;
+    }
+
+    #startVoice {
+      flex-shrink: 0;
+    }
+  </style>
 </head>
+
 <body>
 
-<div class="chat-container" id="chatContainer">
-<div class="chat-bubble bot-response">Willkommen! Wie kann ich Ihnen helfen?</div>
-</div>
+  <div class="chat-container" id="chatContainer">
+    <div class="chat-bubble bot-response">Willkommen! Wie kann ich Ihnen helfen?</div>
+  </div>
 
-<div class="input-container">
-<input type="text" id="inputField" placeholder="Geben Sie hier Ihre Nachricht ein...">
-<button id="startVoice">Record</button>
-</div>
+  <div class="input-container">
+    <input type="text" id="inputField" placeholder="Geben Sie hier Ihre Nachricht ein...">
+  </div>
 
-<script>
-   const chatContainer = document.getElementById('chatContainer');
-   const inputField = document.getElementById('inputField');
+  <script src="commands.js"></script> <!-- Deine Datenbank (JS-Objekt) einbinden -->
+  <script>
+    const chatContainer = document.getElementById('chatContainer');
+    const inputField = document.getElementById('inputField');
 
-   function addChatBubble(text, isUserInput) {
-     const chatBubble = document.createElement('div');
-     chatBubble.classList.add('chat-bubble');
-     if (isUserInput) {
-       chatBubble.classList.add('user-input');
-     } else {
-       chatBubble.classList.add('bot-response');
-     }
-     chatBubble.textContent = text;
-     chatContainer.appendChild(chatBubble);
-     chatContainer.scrollTop = chatContainer.scrollHeight; // scroll to bottom
-   }
+    function addChatBubble(text, isUserInput) {
+      const chatBubble = document.createElement('div');
+      chatBubble.classList.add('chat-bubble');
+      if (isUserInput) {
+        chatBubble.classList.add('user-input');
+      } else {
+        chatBubble.classList.add('bot-response');
+      }
+      chatBubble.innerHTML = text; // InnerHTML verwenden, um <br> korrekt darzustellen
+      chatContainer.appendChild(chatBubble);
+      chatContainer.scrollTop = chatContainer.scrollHeight; // Scroll to bottom
+    }
 
-   function processUserInput(userInput) {
-     if (userInput.includes("geht", "dir")) {
-       addChatBubble("Mir geht es gut, danke der Nachfrage!", false);
-       responsiveVoice.speak("Mir geht es gut, danke der Nachfrage!", "Deutsch Male");
-     
-      } else if (userInput.includes("Wetter", "jetzt")) {
-        fetchWeather();
+    function processUserInput(userInput) {
+      const userInput1 = userInput.toLowerCase();
+      const args = userInput1.split(' ').slice(1); // Argumente nach dem Befehl
 
-     }
-     else if (userInput.includes("start", "song", "paradise")) {
-        print("f")
+      if (userInput1.startsWith('hallo')) {
+        addChatBubble("Hallo! Wie kann ich dir helfen?", false);
+      } else if (userInput1.startsWith('!calc')) {
+          const expression = args.join(' ').trim(); // Den gesamten Ausdruck als String
+          try {
+            const result = eval(expression); // eval() berechnet den mathematischen Ausdruck
+            if (isNaN(result)) {
+              addChatBubble('Das ist kein gültiger mathematischer Ausdruck. Bitte versuche es noch einmal.', false);
+            } else {
+              addChatBubble(`Das Ergebnis von \`${expression}\` ist: ${result}`, false);
+            }
+          } catch (error) {
+            addChatBubble('Es gab einen Fehler bei der Berechnung. Bitte überprüfe deinen Ausdruck.', false);
+          }
+      } else if (userInput1.startsWith('!help')) {
+        let helpMessage = "Hier sind die verfügbaren Befehle:<br><br>";
 
-     }
-     else {
-      addChatBubble("Das weiss ich leider nicht!", false);
-      responsiveVoice.speak("Das weiss ich leider nicht!", "Deutsch Male");
-     }
-   }
+        // Durch die Befehle iterieren und mit <br> ausgeben
+        for (const [command, info] of Object.entries(database)) {
+          helpMessage += `${command}:<br>${info.description}<br>Verwendung: \`${info.usage}\`<br><br>`;
+        }
+        addChatBubble(helpMessage, false);
+      }
+    }
 
-   function handleUserInput() {
-     const userInput = inputField.value.trim();
-     if (userInput === '') return;
-     addChatBubble(userInput, true);
-     inputField.value = ''; // clear input field
-     processUserInput(userInput);
-   }
+    function handleUserInput() {
+      const userInput = inputField.value.trim();
+      if (userInput === '') return;
+      addChatBubble(userInput, true);
+      inputField.value = ''; // clear input field
+      processUserInput(userInput);
+    }
 
-   function handleVoiceInput(transcript) {
-     addChatBubble(transcript, true);
-     processUserInput(transcript);
-   }
+    inputField.addEventListener('keypress', function (event) {
+      if (event.key === 'Enter') {
+        handleUserInput();
+      }
+    });
+  </script>
 
-   function startVoice() {
-     if ('webkitSpeechRecognition' in window) {
-       var recognition = new webkitSpeechRecognition();
-       recognition.continuous = false;
-       recognition.lang = 'de';
-       recognition.onresult = function(event) {
-         var transcript = event.results[0][0].transcript;
-         handleVoiceInput(transcript);
-       };
-       recognition.start();
-     } else {
-       console.log('Die Spracherkennung wird vom Browser nicht unterstützt.');
-     }
-   }
-
-   var startVoiceButton = document.getElementById('startVoice');
-   startVoiceButton.addEventListener('click', startVoice);
-   inputField.addEventListener('keypress', function(event) {
-     if (event.key === 'Enter') {
-       handleUserInput();
-     }
-   });
-
-   function fetchWeather() {
-    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&lang=de&units=metric`)
-        .then(response => response.json())
-        .then(data => {
-          const temperature = data.main.temp;
-          addChatBubble(`In ${city} ist es ${temperature}°C.`, false);
-          responsiveVoice.speak(`In ${city} ist es ${temperature}°C.`, "Deutsch Male");
-        })
-        .catch(error => console.error('Fehler beim Abrufen der Wetterdaten:', error));
-   }
-</script>
-<script src="../JS Files/CloseButton.js"></script>
+  <script src="../JS Files/CloseButton.js"></script>
   <script src="../JS Files/DarkModeSwitch.js"></script>
 </body>
+
 </html>
