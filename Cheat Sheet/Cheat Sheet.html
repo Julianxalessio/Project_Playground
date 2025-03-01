@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="de">
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cheat Sheet</title>
+    <style> 
+        body{
+            font-family: Arial;
+            font-size: 20px;
+        }
+        #InfotextContainer {
+            background-color: rgb(219, 219, 219);
+            border: 3px solid black;
+            border-radius: 0 0 0 10%;
+            width: 35%;
+            height: 75%;
+            left: 65%;
+            position: fixed;
+            top: -3px;
+        }
+        #Definition{
+            position: fixed;
+            top: 45px;
+            margin-left: 10px;
+        }
+        #Title{
+            position: fixed;
+            top: 15px;
+            margin-left: 10px;
+        }
+        .OneTab{
+            padding-left: 40px;
+        }
+        .TwoTab{
+            padding-left : 80px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="InfotextContainer">
+        <a id="Title"><b><u>What it does</u></b></a>
+        <a id="Definition"></a>
+    </div>
+    <!--&lt = < | &gt = > -->
+    <p onclick="SetDef(this.innerText)">&lt;!DOCTYPE html&gt;</p>
+    <p onclick="SetDef(this.innerText)">&lt;html lang="de"&gt;</p>
+    <p onclick="SetDef(this.innerText)">&lt;html&gt;</p>
+    <p onclick="SetDef(this.innerText)">&lt;head&gt;</p>
+    <p onclick="SetDef(this.innerText)" class="OneTab">&lt;meta&gt;</p>
+    <p onclick="SetDef(this.innerText)">&lt;/head&gt;</p>
+    <p onclick="SetDef(this.innerText)">&lt;/html&gt;</p>
+
+    <script src="Database HTML.js"></script>
+    <script>
+        function SetDef(Code) {
+            const Var1 = html.find(item => item.id === Code);
+            console.log(Code);
+            Definition.textContent = Var1.Definition;
+        }
+    </script>
+</body>
+
+</html>

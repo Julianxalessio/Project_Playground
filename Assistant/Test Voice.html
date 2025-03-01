@@ -67,6 +67,7 @@
       background-color: #ddd;
       position: fixed;
       bottom: 0;
+      width: 750px;
     }
 
     #inputField {
@@ -92,11 +93,16 @@
     <input type="text" id="inputField" placeholder="Geben Sie hier Ihre Nachricht ein...">
   </div>
 
-  <script src="commands.js"></script> <!-- Deine Datenbank (JS-Objekt) einbinden -->
+  <script src="commands.js"></script>
   <script>
+
+    // ============================= Variablen ============================
+
     const chatContainer = document.getElementById('chatContainer');
     const inputField = document.getElementById('inputField');
 
+    // ============================= Hauptteile zum funktionieren des Bots ============================
+    
     function addChatBubble(text, isUserInput) {
       const chatBubble = document.createElement('div');
       chatBubble.classList.add('chat-bubble');
@@ -110,34 +116,11 @@
       chatContainer.scrollTop = chatContainer.scrollHeight; // Scroll to bottom
     }
 
-    function processUserInput(userInput) {
-      const userInput1 = userInput.toLowerCase();
-      const args = userInput1.split(' ').slice(1); // Argumente nach dem Befehl
-
-      if (userInput1.startsWith('hallo')) {
-        addChatBubble("Hallo! Wie kann ich dir helfen?", false);
-      } else if (userInput1.startsWith('!calc')) {
-          const expression = args.join(' ').trim(); // Den gesamten Ausdruck als String
-          try {
-            const result = eval(expression); // eval() berechnet den mathematischen Ausdruck
-            if (isNaN(result)) {
-              addChatBubble('Das ist kein gültiger mathematischer Ausdruck. Bitte versuche es noch einmal.', false);
-            } else {
-              addChatBubble(`Das Ergebnis von \`${expression}\` ist: ${result}`, false);
-            }
-          } catch (error) {
-            addChatBubble('Es gab einen Fehler bei der Berechnung. Bitte überprüfe deinen Ausdruck.', false);
-          }
-      } else if (userInput1.startsWith('!help')) {
-        let helpMessage = "Hier sind die verfügbaren Befehle:<br><br>";
-
-        // Durch die Befehle iterieren und mit <br> ausgeben
-        for (const [command, info] of Object.entries(database)) {
-          helpMessage += `${command}:<br>${info.description}<br>Verwendung: \`${info.usage}\`<br><br>`;
-        }
-        addChatBubble(helpMessage, false);
+    inputField.addEventListener('keypress', function (event) {
+      if (event.key === 'Enter') {
+        handleUserInput();
       }
-    }
+    });
 
     function handleUserInput() {
       const userInput = inputField.value.trim();
@@ -147,11 +130,40 @@
       processUserInput(userInput);
     }
 
-    inputField.addEventListener('keypress', function (event) {
-      if (event.key === 'Enter') {
-        handleUserInput();
+    // ============================= Commands ============================
+
+    function processUserInput(userInput) {
+      const userInput1 = userInput.toLowerCase();
+      const args = userInput1.split(' ').slice(1); // Argumente nach dem Befehl
+
+      if (userInput1.startsWith('hallo')) {
+        setTimeout(addChatBubble("Hallo! Wie kann ich dir helfen?", false), 2000);
+      } 
+      
+      else if (userInput1.startsWith('!calc')) {
+          const expression = args.join(' ').trim(); // Den gesamten Ausdruck als String
+          try {
+            const result = eval(expression); // eval() berechnet den mathematischen Ausdruck
+            if (isNaN(result)) {
+              setTimeout(addChatBubble('Das ist kein gültiger mathematischer Ausdruck. Bitte versuche es noch einmal.', false), 2000);
+            } else {
+              setTimeout(addChatBubble(`Das Ergebnis von \`${expression}\` ist: ${result}`, false), 2000);
+            }
+          } catch (error) {
+            setTimeout(addChatBubble('Es gab einen Fehler bei der Berechnung. Bitte überprüfe deinen Ausdruck.', false), 2000);
+          }
+      } 
+      
+      else if (userInput1.startsWith('!help')) {
+        let helpMessage = "Hier sind die verfügbaren Befehle:<br><br>";
+
+        for (const [command, info] of Object.entries(database)) {
+          helpMessage += `${command}:<br>${info.description}<br>Verwendung: \`${info.usage}\`<br><br>`;
+        }
+        setTimout(addChatBubble(helpMessage, false), 2000);
       }
-    });
+
+    }
   </script>
 
   <script src="../JS Files/CloseButton.js"></script>
