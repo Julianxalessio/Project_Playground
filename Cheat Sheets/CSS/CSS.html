@@ -5,15 +5,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../CSS Files/CloseButton.css">
-    <link rel="stylesheet" href="../CSS Files/DarkModeSwitch.css">
+    <link rel="stylesheet" href="../../CSS Files/CloseButton.css">
+    <link rel="stylesheet" href="../../CSS Files/DarkModeSwitch.css">
     <link rel="icon" alt="Logo" href="Cheat Sheet.png">
     <title>Cheat Sheet</title>
-    <style> 
-        body{
+    <style>
+        body {
             font-family: Arial;
             font-size: 20px;
         }
+
         #InfotextContainer {
             background-color: rgb(219, 219, 219);
             border: 3px solid black;
@@ -24,21 +25,25 @@
             position: fixed;
             top: -3px;
         }
-        #Definition{
+
+        #Definition {
             position: fixed;
             top: 45px;
             margin-left: 10px;
         }
-        #Title{
+
+        #Title {
             position: fixed;
             top: 15px;
             margin-left: 10px;
         }
-        .OneTab{
+
+        .OneTab {
             padding-left: 40px;
         }
-        .TwoTab{
-            padding-left : 80px;
+
+        .TwoTab {
+            padding-left: 80px;
         }
     </style>
 </head>
@@ -64,9 +69,17 @@
             console.log(Code);
             Definition.textContent = Var1.Definition;
         }
+        var Close = document.createElement("button");
+        Close.id = "closeButton"; // Neu hinzugefügte ID für die Positionierung
+        Close.innerHTML = "Close";
+        document.body.appendChild(Close);
+        Close.onclick = Closer;
+
+        function Closer() {
+            window.location.replace("../../index.html");
+        }
     </script>
-    <script src="../JS Files/CloseButton.js"></script>
-    <script src="../JS Files/DarkModeSwitch.js"></script>
+    <script src="../../JS Files/DarkModeSwitch.js"></script>
 </body>
 
 </html>

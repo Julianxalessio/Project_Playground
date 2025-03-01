@@ -36,7 +36,7 @@
     }
 
     #uhrzeit {
-      position: absolute;
+      position: fixed;
       top: 10px;
       right: 10px;
       font-size: 1.5em;
@@ -73,11 +73,12 @@
     .app-item img {
       height: 80px;
       /* Einheitliche Höhe */
-      width: auto;
+      width: 80px;
       /* Proportionen beibehalten */
-      object-fit: contain;
-      /* Verhindert Verzerrung */
+      
       margin-bottom: 10px;
+      border-radius: 20%;
+      border: 2px solid black;
       /* Abstand zwischen Bild und Text */
     }
 
@@ -155,8 +156,16 @@
       <h3>Noten</h3>
     </div>
     <div class="app-item">
-      <img onclick="OpenSheet()" src="Cheat Sheet/Cheat Sheet.png" alt="Sheet">
-      <h3>Cheat Sheet</h3>
+      <img onclick="OpenHTML()" src="Cheat Sheets/HTML/HTML.png" alt="HTML">
+      <h3>HTML</h3>
+    </div>
+    <div class="app-item">
+      <img onclick="OpenJS()" src="Cheat Sheets/JS/JS.jpg" alt="HTML">
+      <h3>JS</h3>
+    </div>
+    <div class="app-item">
+      <img onclick="OpenCSS()" src="Cheat Sheets/CSS/CSS.png" alt="HTML">
+      <h3>CSS</h3>
     </div>
   </div>
 
@@ -204,8 +213,14 @@
     function OpenNote() {
       window.location.replace("Note/Note.html");
     }
-    function OpenSheet() {
-      window.location.replace("Cheat Sheet/Cheat Sheet.html");
+    function OpenHTML() {
+      window.location.replace("Cheat Sheets/HTML/HTML.html");
+    }
+    function OpenJS() {
+      window.location.replace("Cheat Sheets/JS/JS.html");
+    }
+    function OpenCSS() {
+      window.location.replace("Cheat Sheets/CSS/CSS.html");
     }
 
     function uhrzeit() {
