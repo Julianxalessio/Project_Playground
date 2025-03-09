@@ -11,16 +11,19 @@
     <title>Cheat Sheet</title>
     <style>
         body {
-            font-family: Arial;
+            font-family: Consolas, monospace;
             font-size: 20px;
+        }
+
+        p {
+            line-height: 0.75;
         }
 
         #InfotextContainer {
             background-color: rgb(219, 219, 219);
             border: 3px solid black;
-            border-radius: 0 0 0 10%;
             width: 35%;
-            height: 75%;
+            height: 50%;
             left: 65%;
             position: fixed;
             top: -3px;
@@ -38,6 +41,40 @@
             margin-left: 10px;
         }
 
+        #SearchBox {
+            background-color: rgb(219, 219, 219);
+            border: 3px solid black;
+            border-radius: 0 0 0 10%;
+            width: 35%;
+            height: 50%;
+            left: 65%;
+            position: fixed;
+            top: 50%;
+        }
+
+        #SearchInput {
+            position: fixed;
+            margin-top: 15px;
+            margin-left: 10px;
+            width: 300px;
+            height: 30px;
+            font-size: 18px;
+        }
+
+        #Ergebnisse {
+            margin-top: 70px;
+        }
+
+        #Buttons {
+            position: fixed;
+            margin-left: 320px;
+            margin-top: 15px;
+        }
+
+        #Buttons button {
+            height: 35px;
+        }
+
         .OneTab {
             padding-left: 40px;
         }
@@ -53,22 +90,79 @@
         <a id="Title"><b><u>What it does</u></b></a>
         <a id="Definition"></a>
     </div>
+    <div id="SearchBox">
+        <input id="SearchInput"></input>
+        <div id="Buttons">
+            <button id="Ok" onclick="Search()">Search</button>
+            <button id="Reset" onclick="ResetSearch()">Reset</button>
+        </div>
+        <div id="Ergebnisse"></div>
+    </div>
     <!--&lt = < | &gt = > -->
     <p onclick="SetDef(this.innerText)">&lt;!DOCTYPE html&gt;</p>
     <p onclick="SetDef(this.innerText)">&lt;html lang="de"&gt;</p>
     <p onclick="SetDef(this.innerText)">&lt;html&gt;</p>
     <p onclick="SetDef(this.innerText)">&lt;head&gt;</p>
+    <p onclick="SetDef(this.innerText)" class="OneTab">&lt;link rel="stylesheet" href="Path-To-Stylesheet.css"&gt;</p>
+    <p onclick="SetDef(this.innerText)" class="OneTab">&lt;link rel="icon" alt="Logo" href="Path-To-Icon.png"&gt;</p>
     <p onclick="SetDef(this.innerText)" class="OneTab">&lt;meta&gt;</p>
+    <p onclick="SetDef(this.innerText)" class="OneTab">&lt;title&gt;Name-of-the-Site&lt;/title&gt;</p>
+    <p onclick="SetDef(this.innerText)" class="OneTab">&lt;style&gt;&lt;/style&gt;</p>
     <p onclick="SetDef(this.innerText)">&lt;/head&gt;</p>
+    <p onclick="SetDef(this.innerText)">&lt;body&gt;</p>
+    <p onclick="SetDef(this.innerText)">&lt;/body&gt;</p>
     <p onclick="SetDef(this.innerText)">&lt;/html&gt;</p>
 
     <script src="Database HTML.js"></script>
     <script>
+        // ============================= Functions ============================
+
         function SetDef(Code) {
             const Var1 = html.find(item => item.id === Code);
-            console.log(Code);
             Definition.textContent = Var1.Definition;
         }
+
+        // ============================= Functions Search ============================
+
+        function Search() {
+            const wortKlein = SearchInput.value.toLowerCase();
+            console.log(wortKlein);
+            const ergebnisse = html.filter(eintrag => eintrag.Definition.toLowerCase().includes(wortKlein));
+
+            const ergebnisseDiv = document.getElementById("Ergebnisse");
+            ergebnisseDiv.innerHTML = ""; // Vorherige Ergebnisse löschen
+
+            if (ergebnisse.length > 0) {
+                ergebnisse.forEach(eintrag => {
+                    const newParagraph = document.createElement("p");
+                    newParagraph.textContent = eintrag.id;
+                    newParagraph.onclick = function () {
+                        SetDef(this.innerText);
+                    };
+                    ergebnisseDiv.appendChild(newParagraph);
+                });
+            } else {
+                const message = document.createElement("p");
+                message.textContent = "Keine passenden Ergebnisse gefunden.";
+                ergebnisseDiv.appendChild(message);
+            }
+        }
+        function ResetSearch(){
+            const ergebnisseDiv = document.getElementById("Ergebnisse");
+            ergebnisseDiv.innerHTML = ""; 
+        }
+
+        // ============================= Eventlisteners ============================
+
+        //Search on Enter
+        SearchInput.addEventListener('keypress', function (event){
+            if (event.key == 'Enter'){
+                Search();
+            }
+        });
+      
+        // ============================= CloseButton ============================
+
         var Close = document.createElement("button");
         Close.id = "closeButton"; // Neu hinzugefügte ID für die Positionierung
         Close.innerHTML = "Close";
@@ -78,6 +172,7 @@
         function Closer() {
             window.location.replace("../../index.html");
         }
+        
     </script>
     <script src="../../JS Files/DarkModeSwitch.js"></script>
 </body>

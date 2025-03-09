@@ -28,6 +28,30 @@ const html = [
     Definition: "Closing-Tag für <html>"
 },
 {
+    id: "<link rel=\"icon\" alt=\"Logo\" href=\"Path-To-Icon.png\">",
+    Definition: "Ändert das Logo der Website (im Tab)."
+},
+{
+    id: "<link rel=\"stylesheet\" href=\"Path-To-Stylesheet.css\">",
+    Definition: "Fügt ein externes Stylesheet zur Website hinzu."
+},
+{
+    id: "<title>Name-of-the-Site</title>",
+    Definition: "Ändert den Titel der Website beliebig (im Tab)."
+},
+{
+    id: "<style></style>",
+    Definition: "Hier kommt der CSS-Code rein."
+},
+{
+    id: "<>",
+    Definition: "Setzt die Sprache auf Deutsch"
+},
+{
+    id: "<>",
+    Definition: "Setzt die Sprache auf Deutsch"
+},
+{
     id: "<>",
     Definition: "Setzt die Sprache auf Deutsch"
 },
