@@ -1,0 +1,24 @@
+body: Hier kommen alle Elemente wie Texte, Buttons, Divs und Bilder rein. Hier wird auch der JavaScript-Code eingefügt.
+/body:
+script:
+script src="": 
+p:
+h1-6:
+div:
+img:
+ul:
+    li:
+table:
+    tr:
+        th:
+        td:      
+button:
+input:
+input readonly="true":
+big:
+small:
+audio:
+u:
+b:
+i:
+summary:
