@@ -1,0 +1,76 @@
+body {
+    font-family: Consolas, monospace;
+    font-size: 20px;
+}
+
+p {
+    line-height: 0.75;
+}
+
+#InfotextContainer {
+    background-color: rgb(219, 219, 219);
+    border: 3px solid black;
+    width: 35%;
+    height: 50%;
+    left: 65%;
+    position: fixed;
+    top: -3px;
+}
+
+#Definition {
+    position: fixed;
+    top: 45px;
+    margin-left: 10px;
+}
+
+#Title {
+    position: fixed;
+    top: 15px;
+    margin-left: 10px;
+}
+
+#SearchBox {
+    background-color: rgb(219, 219, 219);
+    border: 3px solid black;
+    border-radius: 0 0 0 10%;
+    width: 35%;
+    height: 50%;
+    left: 65%;
+    position: fixed;
+    top: 50%;
+}
+
+#SearchInput {
+    position: fixed;
+    margin-top: 15px;
+    margin-left: 10px;
+    width: 300px;
+    height: 30px;
+    font-size: 18px;
+}
+
+#Ergebnisse {
+    margin-top: 70px;
+}
+
+#Buttons {
+    position: fixed;
+    margin-left: 320px;
+    margin-top: 15px;
+}
+
+#Buttons button {
+    height: 35px;
+}
+
+.OneTab {
+    padding-left: 40px;
+}
+
+.TwoTab {
+    padding-left: 80px;
+}
+
+.ThreeTab {
+    padding-left: 120px;
+}

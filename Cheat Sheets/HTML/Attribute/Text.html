@@ -5,9 +5,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../CSS Files/CloseButton.css">
-    <link rel="stylesheet" href="Style.css">
-    <link rel="icon" alt="Logo" href="HTML.png">
+    <link rel="stylesheet" href="../../../CSS Files/CloseButton.css">
+    <link rel="stylesheet" href="../Style.css">
+    <link rel="icon" alt="Logo" href="../HTML.png">
     <title>Cheat Sheet</title>
     <style>
         
@@ -27,12 +27,7 @@
         </div>
         <div id="Ergebnisse"></div>
     </div>
-    <div>
-        <a href="Attribute/Text.html">Attribute Text</a><br>
-        <a href="Attribute/IMG.html">Attribute IMG</a><br>
-        <a href="Attribute/Input.html">Attribute Input</a><br>
-        <a href="Attribute/Button.html">Attribute Button</a><br>
-    </div>
+
     <!--&lt = < | &gt = > -->
     <p onclick="SetDef(this.innerText)">&lt;!DOCTYPE html&gt;</p>
     <p onclick="SetDef(this.innerText)">&lt;html lang="de"&gt;</p>
@@ -77,7 +72,7 @@
     <p onclick="SetDef(this.innerText)">&lt;/body&gt;</p>
     <p onclick="SetDef(this.innerText)">&lt;/html&gt;</p>
 
-    <script src="Database HTML.js"></script>
+    <script src="DB Text.js"></script>
     <script>
 
         // ============================= Functions ============================
@@ -134,12 +129,12 @@
 
         var Close = document.createElement("button");
         Close.id = "closeButton"; // Neu hinzugefügte ID für die Positionierung
-        Close.innerHTML = "Close";
+        Close.innerHTML = "Back";
         document.body.appendChild(Close);
         Close.onclick = Closer;
 
         function Closer() {
-            window.location.replace("../../index.html");
+            window.location.replace("../HTML.html");
         }
     </script>
 </body>
