@@ -1,10 +1,10 @@
 body: Hier kommen alle Elemente wie Texte, Buttons, Divs und Bilder rein. Hier wird auch der JavaScript-Code eingefügt.
-/body:
-script:
-script src="": 
+/body: !
+script: !
+script src="": !
 iframe:
 
-div:
+div: !
 br: Line-Breaks
 hr: optische Trennlinie
 
@@ -12,7 +12,7 @@ hr: optische Trennlinie
 ul:
     li:
 table:
-caption: Tabellenüberschrift
+    caption: Tabellenüberschrift
     tr:
         th:
         td:    
@@ -27,12 +27,12 @@ select:
 
 big:
 small:
-p:
-h1-6:
+p: !
+h1-6: !
 
 link:
 nav:
-a:
+a: !
 
 sup: Zeichen hochstellen
 Sub: Zeichen tiefstellen
@@ -44,8 +44,9 @@ s: Durchstreichen
 
 audio:
 Video:
-map:
-img:
+map: Erstellt auf einem verlinkten Foto, durch das Hinzufügen des Tags "usemap="#Name-of-the-map"", eine Art Container für das hinzufügen von Hitboxen.
+    area: Bestimmt die Hitbox. Wie die Form sein soll, wo sie sich befindet und die Verlinkung was passieren soll, falls darauf gedrückt wird.
+img: !
 
 
 
