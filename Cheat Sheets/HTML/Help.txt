@@ -2,16 +2,16 @@ body: Hier kommen alle Elemente wie Texte, Buttons, Divs und Bilder rein. Hier w
 /body: !
 script: !
 script src="": !
-iframe:
+iframe: Ermöglicht es eine Website in deine einzusetzten.
 
 div: !
 br: Line-Breaks
 hr: optische Trennlinie
 
 
-ul:
-    li:
-table:
+ul: Definiert die Liste 
+    li: Textobjekte die aufgelistet werden mit Punkten.
+table: Definiert die Tabelle
     caption: Tabellenüberschrift
     tr:
         th:
