@@ -1,14 +1,18 @@
 async function fetchLiveData() {
     try {
         // API-Daten abrufen
-        const [intervalData, positionData, carData, driverData] = await Promise.all([
+        const [intervalData, positionData, carData, driverData, lapData] = await Promise.all([
             fetch('https://api.openf1.org/v1/intervals').then(res => res.json()),
             fetch('https://api.openf1.org/v1/position').then(res => res.json()),
             fetch('https://api.openf1.org/v1/car_data').then(res => res.json()),
-            fetch('https://api.openf1.org/v1/drivers').then(res => res.json())
+            fetch('https://api.openf1.org/v1/drivers').then(res => res.json()),
+            fetch('https://api.openf1.org/v1/laps').then(res => res.json()),
+            fetch('https://api.openf1.org/v1/races').then(res => res.json()),
+            fetch('https://api.openf1.org/v1/tyres').then(res => res.json())
         ]);
-
         let output = "<h2>Aktueller Rennstand:</h2><div>";
+        const lap = lapData.lapNumber ?? 0;
+        const maxLaps = lapData.lapMax ?? 0;
 
         positionData.forEach((driver, index) => {
             const position = index + 1; // Position (#1, #2, #3 …)
@@ -43,6 +47,7 @@ async function fetchLiveData() {
 
         output += "</div>";
         document.getElementById("race-data").innerHTML = output;
+        document.getElementById("race-data").insertAdjacentHTML("afterbegin", `<h3>${lap}/${maxLaps}</h3>`);
     } catch (error) {
         console.error("Fehler beim Abrufen der Renndaten:", error);
         document.getElementById("race-data").innerText = "Fehler beim Laden der Daten.";

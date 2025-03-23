@@ -2,20 +2,70 @@ async function fetchLiveData() {
     try {
         // Simulierte lokale Datenbank (Mock-Daten)
         const data = {
-            results: [
-                { name: "Max Verstappen", team: "Red Bull Racing", interval: null },
-                { name: "Lewis Hamilton", team: "Mercedes", interval: "+10s" },
-                { name: "Charles Leclerc", team: "Ferrari", interval: "+1.002s" }
+            results: [{
+                    name: "Max Verstappen",
+                    team: "Red Bull Racing",
+                    interval: null,
+                    location: "PIT"
+                },
+                {
+                    name: "Lewis Hamilton",
+                    team: "Ferrari",
+                    interval: "+10s",
+                    location: "TRACK"
+
+                },
+                {
+                    name: "Charles Leclerc",
+                    team: "Ferrari",
+                    interval: "+1.002s",
+                    location: "TRACK"
+
+                }
             ]
         };
 
-        const carData = {
-            "Max Verstappen": { drsActive: true, speed: 300 },
-            "Lewis Hamilton": { drsActive: false, speed: 295 },
-            "Charles Leclerc": { drsActive: true, speed: 310 }
+        const lapData = {
+            lapNumber: 5,
+            maxLap: 55
         };
 
+        const tyreData = {
+            "Max Verstappen": {
+                type: "Soft",
+                age: 3
+            },
+            "Lewis Hamilton": {
+                type: "Medium",
+                age: 7
+            },
+            "Charles Leclerc": {
+                type: "Hard",
+                age: 12
+            }
+        };
+
+
+        const carData = {
+            "Max Verstappen": {
+                drsActive: true,
+                speed: 300
+            },
+            "Lewis Hamilton": {
+                drsActive: false,
+                speed: 295
+            },
+            "Charles Leclerc": {
+                drsActive: true,
+                speed: 310
+            }
+        };
+
+        const lap = lapData.lapNumber ?? 0;
+        const maxLaps = lapData.maxLap ?? 0;
+
         let output = "<h2>Aktueller Rennstand:</h2><div>";
+        output += `<h3>Lap: ${lap}/${maxLaps}</h3>`;
 
         data.results.forEach((driver, index) => {
             const position = index + 1; // Platzierung hinzufügen
@@ -29,6 +79,11 @@ async function fetchLiveData() {
             const drsStatus = carData[driverName] ? (carData[driverName].drsActive ? "Aktiv" : "Inaktiv") : "Unbekannt";
             const speed = carData[driverName] ? carData[driverName].speed : "Unbekannt";
 
+            const pitStatus = driver.location === "PIT" ? "🔴 In der Box" : "🏎️ Auf der Strecke";
+
+            const tyreType = tyreData[driverName] ?.type ?? "Unbekannt";
+            const tyreAge = tyreData[driverName] ?.age ?? 0;
+
             output += `
                 <div class="race-item">
                     <div class="driver-info">
@@ -39,9 +94,13 @@ async function fetchLiveData() {
                     <div class="status ${drsStatus.toLowerCase()}">
                         DRS: ${drsStatus}
                     </div>
+                    <div class="pit-status">${pitStatus}</div>
                     <div class="gap">${gap}</div>
                     <div class="speed">
                         Speed: ${speed} km/h
+                    </div>
+                    <div class="tyre-info">
+                        Reifen: ${tyreType} (${tyreAge} Runden)
                     </div>
                 </div>`;
         });
