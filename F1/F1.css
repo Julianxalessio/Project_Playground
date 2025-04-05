@@ -101,3 +101,13 @@ h1 {
     min-width: 80px;
     text-align: center;
 }
+
+.safetycar-alert {
+    background: yellow;
+    color: black;
+    font-weight: bold;
+    padding: 10px;
+    margin: 10px 0;
+    border: 2px solid red;
+    text-align: center;
+}

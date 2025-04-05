@@ -1,3 +1,9 @@
+function ActivateSafetyCar(){
+    if(SafetyCar == false){SafetyCar = true;}
+    else {SafetyCar = false;}
+}
+let SafetyCar = false;  
+
 async function fetchLiveData() {
     try {
         // Simulierte lokale Datenbank (Mock-Daten)
@@ -62,10 +68,16 @@ async function fetchLiveData() {
         };
 
         const lap = lapData.lapNumber ?? 0;
-        const maxLaps = lapData.maxLap ?? 0;
+        const maxLaps = lapData.maxLap ??  0;
 
         let output = "<h2>Aktueller Rennstand:</h2><div>";
         output += `<h3>Lap: ${lap}/${maxLaps}</h3>`;
+
+        const safetyCarOnTrack = SafetyCar;
+
+        if (safetyCarOnTrack) {
+            output += `<div class="safetycar-alert">🚨 Safety Car ist auf der Strecke!</div>`;
+        }
 
         data.results.forEach((driver, index) => {
             const position = index + 1; // Platzierung hinzufügen
@@ -73,7 +85,7 @@ async function fetchLiveData() {
             const teamName = driver.team;
 
             // Zeitabstand abrufen
-            const gap = driver.interval ? driver.interval : "0.0s";
+            const gap = driver.interval ? driver.interval : "Interval";
 
             // Fahrzeugdaten abrufen
             const drsStatus = carData[driverName] ? (carData[driverName].drsActive ? "Aktiv" : "Inaktiv") : "Unbekannt";
@@ -111,4 +123,5 @@ async function fetchLiveData() {
         console.error("Fehler beim Abrufen der Renndaten:", error);
         document.getElementById("race-data").innerText = "Fehler beim Laden der Daten.";
     }
+    setInterval(fetchLiveData, 2000);
 }
