@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pyramide</title>
+    <link rel="stylesheet" href="../../CSS Files/CloseButton.css">
+    <link rel="stylesheet" href="../../CSS Files/DarkModeSwitch.css">
+
+    <style>
+        body {
+            background: #f0f0f0;
+
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="koordinaten" width="660" height="660" style="border:1px solid #000;"></canvas>
+
+    <input id="G" type="text" placeholder="Gleichung">
+    <script defer>
+        const canvas = document.getElementById("koordinaten");
+        const ctx = canvas.getContext("2d");
+
+        const einheit = 30; // 1 Einheit = 30 Pixel
+        const minKoord = -10;
+        const maxKoord = 10;
+        const anzahlLinien = maxKoord - minKoord + 1; // 21 Linien
+
+        const offsetX = canvas.width / 2;
+        const offsetY = canvas.height / 2;
+
+        function DrawCoords(){
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.font = "14px Arial";
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+
+        // --- Gitter zeichnen ---
+        ctx.strokeStyle = "#ddd";
+        ctx.lineWidth = 1;
+
+        // Vertikale Gitterlinien (von oben nach unten)
+        for (let i = minKoord; i <= maxKoord; i++) {
+            const x = offsetX + i * einheit;
+            ctx.beginPath();
+            ctx.moveTo(x, offsetY - maxKoord * einheit); // oben
+            ctx.lineTo(x, offsetY - minKoord * einheit); // unten
+            ctx.stroke();
+        }
+
+        // Horizontale Gitterlinien (von links nach rechts)
+        for (let i = minKoord; i <= maxKoord; i++) {
+            const y = offsetY - i * einheit;
+            ctx.beginPath();
+            ctx.moveTo(offsetX + minKoord * einheit, y);
+            ctx.lineTo(offsetX + maxKoord * einheit, y);
+            ctx.stroke();
+        }
+
+        // --- Achsen zeichnen ---
+        ctx.strokeStyle = "black";
+        ctx.lineWidth = 2;
+
+        // Y-Achse (x=0)
+        ctx.beginPath();
+        ctx.moveTo(offsetX, offsetY - maxKoord * einheit);
+        ctx.lineTo(offsetX, offsetY - minKoord * einheit);
+        ctx.stroke();
+
+        // X-Achse (y=0)
+        ctx.beginPath();
+        ctx.moveTo(offsetX + minKoord * einheit, offsetY);
+        ctx.lineTo(offsetX + maxKoord * einheit, offsetY);
+        ctx.stroke();
+
+        // --- Achsenbeschriftungen und Markierungen ---
+        ctx.fillStyle = "black";
+
+        for (let i = minKoord; i <= maxKoord; i++) {
+            if (i === 0) continue;
+
+            // Markierungen X-Achse
+            const x = offsetX + i * einheit;
+            ctx.beginPath();
+            ctx.moveTo(x, offsetY - 5);
+            ctx.lineTo(x, offsetY + 5);
+            ctx.stroke();
+            ctx.fillText(i, x, offsetY + 20);
+
+            // Markierungen Y-Achse
+            const y = offsetY - i * einheit;
+            ctx.beginPath();
+            ctx.moveTo(offsetX - 5, y);
+            ctx.lineTo(offsetX + 5, y);
+            ctx.stroke();
+            ctx.fillText(i, offsetX - 20, y);
+        }
+
+        // Achsenbezeichnungen
+        ctx.fillText("x", offsetX + maxKoord * einheit - 10, offsetY + 20);
+        ctx.fillText("y", offsetX + 20, offsetY - maxKoord * einheit + 10);
+    }
+
+        addEventListener('keydown', (event) => {
+            if (event.key === "Enter") {
+                DrawLine();
+            }
+        });
+
+        function DrawLine() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            DrawCoords();
+
+            ctx.strokeStyle = "red";
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+
+            let started = false;
+            for (let px = offsetX + minKoord * einheit; px <= offsetX + maxKoord * einheit; px++) {
+                const x = (px - offsetX) / einheit;
+                let eval1 = document.getElementById("G").value;
+                eval1 = eval1.replace(/(\d)(x)/g, "$1*$2");
+                const y = eval(eval1);
+
+                if (y >= minKoord && y <= maxKoord) {
+                    const py = offsetY - y * einheit;
+                    if (!started) {
+                        ctx.moveTo(px, py);
+                        started = true;
+                    } else {
+                        ctx.lineTo(px, py);
+                    }
+                } else {
+                    started = false;
+                }
+            }
+            ctx.stroke();
+        };
+        DrawCoords();
+    </script>
+
+
+    <script src="../CloseForms.js"></script>
+    <script src="../../JS Files/DarkModeSwitch.js"></script>
+
+</body>
+
+</html>

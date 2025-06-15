@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Zahlensystem-Konverter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f2f2f2;
+        }
+
+        input {
+            padding: 8px;
+            margin: 10px 0;
+            font-size: 16px;
+            width: 250px;
+        }
+
+        label {
+            display: block;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Zahlensystem-Konverter</h1>
+
+    <label>Binärzahl:</label>
+    <input id="Binary" type="text" placeholder="z. B. 1010">
+
+    <label>Dezimalzahl:</label>
+    <input id="Decimal" type="text" placeholder="z. B. 10">
+
+    <label>Hexadezimalzahl:</label>
+    <input id="Hex" type="text" placeholder="z. B. A">
+
+    <script>
+        const binaryInput = document.getElementById("Binary");
+        const decimalInput = document.getElementById("Decimal");
+        const hexInput = document.getElementById("Hex");
+
+        function updateFromBinary() {
+            const bin = binaryInput.value.trim();
+            if (!/^[01]+$/.test(bin)) {
+                alert("Ungültige Binärzahl!");
+                return;
+            }
+            const dec = parseInt(bin, 2);
+            decimalInput.value = dec;
+            hexInput.value = dec.toString(16).toUpperCase();
+        }
+
+        function updateFromDecimal() {
+            const dec = decimalInput.value.trim();
+            if (!/^\d+$/.test(dec)) {
+                alert("Ungültige Dezimalzahl!");
+                return;
+            }
+            const num = parseInt(dec, 10);
+            binaryInput.value = num.toString(2);
+            hexInput.value = num.toString(16).toUpperCase();
+        }
+
+        function updateFromHex() {
+            const hex = hexInput.value.trim();
+            if (!/^[0-9a-fA-F]+$/.test(hex)) {
+                alert("Ungültige Hexadezimalzahl!");
+                return;
+            }
+            const dec = parseInt(hex, 16);
+            decimalInput.value = dec;
+            binaryInput.value = dec.toString(2);
+        }
+
+        // Events
+        binaryInput.addEventListener("keydown", function (event) {
+            if (event.key === "Enter") updateFromBinary();
+        });
+
+        decimalInput.addEventListener("keydown", function (event) {
+            if (event.key === "Enter") updateFromDecimal();
+        });
+
+        hexInput.addEventListener("keydown", function (event) {
+            if (event.key === "Enter") updateFromHex();
+        });
+
+        // Strg + D zum Zurücksetzen
+        document.addEventListener("keydown", function (event) {
+            if (event.ctrlKey && event.key === "d") {
+                event.preventDefault();
+                binaryInput.value = "";
+                decimalInput.value = "";
+                hexInput.value = "";
+            }
+        });
+    </script>
+</body>
+</html>

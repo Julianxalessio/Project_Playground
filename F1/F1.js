@@ -4,6 +4,11 @@ function ActivateSafetyCar(){
 }
 let SafetyCar = false;  
 
+var Button = document.createElement("button");
+Button.innerHTML = "Toggle Safety Car";
+Button.onclick = ActivateSafetyCar;
+document.body.appendChild(Button);
+
 async function fetchLiveData() {
     try {
         // Simulierte lokale Datenbank (Mock-Daten)
@@ -19,14 +24,12 @@ async function fetchLiveData() {
                     team: "Ferrari",
                     interval: "+10s",
                     location: "TRACK"
-
                 },
                 {
                     name: "Charles Leclerc",
                     team: "Ferrari",
                     interval: "+1.002s",
                     location: "TRACK"
-
                 }
             ]
         };
